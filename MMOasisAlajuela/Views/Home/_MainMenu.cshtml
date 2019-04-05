@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ET.AppDirectory>
+
+@{Layout = null;}
+
+
+@foreach (var item in Model)
+{
+    <ul>
+        <li>
+            @Html.ActionLink(item.AppName, item.ViewPage, new { controller = item.Controller, id = item.Parameter})
+        </li>
+    </ul>
+}

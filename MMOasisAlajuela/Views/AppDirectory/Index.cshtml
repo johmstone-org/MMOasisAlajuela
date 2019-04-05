@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ET.AppDirectory>
+@{
+    ViewBag.Title = "Perfil del Rol";
+}
+
+<!DOCTYPE HTML>
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title - @ViewBag.RoleName</h1>
+            </hgroup>
+        </div>
+    </section>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MainClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MainClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppName)
+            </td>
+
+            <td>
+                @{var isActive = (item.Status ? "Active" : "Inactive");}
+                @Html.DisplayFor(modelItem => isActive)
+            </td>
+            <td>
+                <form method="post" action='@Url.Action("ActiveFlag",new { profileid = item.RARProfileID, roleid = ViewBag.RoleID, appid = item.ApplicationID, status = item.Status })'>
+                    <input id="ChangeStatus" type="submit" value="Cambiar de Status" />
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Regresar a la lista...", "Index", new { controller = "Roles" })
+</p>

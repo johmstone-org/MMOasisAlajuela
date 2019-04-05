@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ET.Roles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE HTML>
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+            </hgroup>
+        </div>
+    </section>
+}
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActiveFlag)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.RoleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RoleDescription)
+    </td>
+    <td>
+        @{var isActive = (item.ActiveFlag ? "Activo" : "Inactivo");}
+        @Html.DisplayFor(modelItem => isActive)
+    </td>
+    <td>
+        <form method="post" action='@Url.Action("ActiveFlag",new { id = item.RoleID, status = item.ActiveFlag})'>
+            <input id="ChangeStatus" type="submit" value="Activar/Inactivar"/>| @Html.ActionLink("Perfil", "Index", new { controller = "AppDirectory", RoleID = item.RoleID })
+        </form>
+</td>
+</tr>
+}
+
+</table>
