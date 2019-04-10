@@ -90,6 +90,7 @@
     <Build Include="Stored Procedures\uspReadAppDirectorybyUser.sql" />
     <Build Include="Stored Procedures\uspInsertRolesApplicationRights.sql" />
     <Build Include="Stored Procedures\uspUpdateRolesApplicationRights.sql" />
+    <Build Include="Stored Procedures\uspReadLabelMainMenu.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />

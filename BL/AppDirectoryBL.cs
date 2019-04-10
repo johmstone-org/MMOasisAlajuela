@@ -26,5 +26,10 @@ namespace BL
         {
             return AppDirectoryDAL.UpdateAppProfile(app, roleid, insertuser);
         }
+
+        public string LabelMenu(string mainclass)
+        {
+            return AppDirectoryDAL.LabelMenu(mainclass);
+        }
     }
 }

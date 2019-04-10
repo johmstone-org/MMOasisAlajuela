@@ -222,5 +222,49 @@ namespace DAL
 
             return rpta;
         }
+
+        public string LabelMenu (string MainClass)
+        {
+            string label = null;
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[adm].[uspReadLabelMainMenu]", SqlCon);
+                    SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                    //Insert Parameters 
+                    SqlParameter ParMainAppName = new SqlParameter
+                    {
+                        ParameterName = "@MainAppName",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = "MMOA"
+                    };
+                    SqlCmd.Parameters.Add(ParMainAppName);
+
+                    SqlParameter ParMainClass = new SqlParameter
+                    {
+                        ParameterName = "@MainClass",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = MainClass
+                    };
+                    SqlCmd.Parameters.Add(ParMainClass);
+
+                    //EXEC Command
+                    label = SqlCmd.ExecuteScalar().ToString();
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return label;
+        }
     }
 }

@@ -6,7 +6,7 @@
 
 <!DOCTYPE HTML>
 
-<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/assets/css/main.css" rel="stylesheet" />
 
 @section featured {
     <section class="featured">
@@ -38,23 +38,23 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.RoleName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.RoleDescription)
-    </td>
-    <td>
-        @{var isActive = (item.ActiveFlag ? "Activo" : "Inactivo");}
-        @Html.DisplayFor(modelItem => isActive)
-    </td>
-    <td>
-        <form method="post" action='@Url.Action("ActiveFlag",new { id = item.RoleID, status = item.ActiveFlag})'>
-            <input id="ChangeStatus" type="submit" value="Activar/Inactivar"/>| @Html.ActionLink("Perfil", "Index", new { controller = "AppDirectory", RoleID = item.RoleID })
-        </form>
-</td>
-</tr>
-}
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleDescription)
+            </td>
+            <td>
+                @{var isActive = (item.ActiveFlag ? "Activo" : "Inactivo");}
+                @Html.DisplayFor(modelItem => isActive)
+            </td>
+            <td>
+                <form method="post" action='@Url.Action("ActiveFlag",new { id = item.RoleID, status = item.ActiveFlag})'>
+                    <input id="ChangeStatus" type="submit" value="Activar/Inactivar" />| @Html.ActionLink("Perfil", "Index", new { controller = "AppDirectory", RoleID = item.RoleID })
+                </form>
+            </td>
+        </tr>
+    }
 
 </table>

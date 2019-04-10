@@ -151,7 +151,7 @@ namespace MMOasisAlajuela.Controllers
                 {
                     Emails Email = new Emails();
 
-                    Email.FromEmail = "Jonitapc_quimind@Hotmail.com";
+                    Email.FromEmail = "johmstone@gmail.com";
                     Email.ToEmail = model.Email;
                     Email.SubjectEmail = "Ministerio Musical Oasis Alajuela - Registro satisfactorio";
                     Email.BodyEmail = "Gracias " + model.FullName + " por registrarse, su cuenta aun esta pendiente de autorizar, pero será autorizada in las próximas 24 horas. Bendiciones...";
@@ -162,14 +162,14 @@ namespace MMOasisAlajuela.Controllers
                     mm.IsBodyHtml = false;
 
                     SmtpClient smtp = new SmtpClient();
-                    //smtp.Host = "smtp.gmail.com";
-                    //smtp.Port = 587;
-                    //smtp.EnableSsl = true;
-                    smtp.Host = "smtp.office365.com";
+                    smtp.Host = "smtp.gmail.com";
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
+                    //smtp.Host = "smtp.office365.com";
+                    //smtp.Port = 587;
+                    //smtp.EnableSsl = true;
 
-                    NetworkCredential nc = new NetworkCredential("Jonitapc_quimind@Hotmail.com", "Jonit@pc1985");
+                    NetworkCredential nc = new NetworkCredential("johmstone@gmail.com", "Jonitapc1985N");
                     smtp.UseDefaultCredentials = true;
                     smtp.Credentials = nc;
                     smtp.Send(mm);
@@ -212,7 +212,7 @@ namespace MMOasisAlajuela.Controllers
             {
                 Emails Email = new Emails();
 
-                Email.FromEmail = "Jonitapc_quimind@Hotmail.com";
+                Email.FromEmail = "johmstone@gmail.com";
                 Email.ToEmail = model.Email;
                 Email.SubjectEmail = Code.FullName + " - Restablecer contraseña";
                 Email.BodyEmail = "Para restablecer su contraseña, utilice el siguiente link https://mmoasisalajuela.azurewebsites.net/Account/ResetPassword?GUID=" + Code.GUID;
@@ -224,14 +224,14 @@ namespace MMOasisAlajuela.Controllers
                 mm.IsBodyHtml = false;
 
                 SmtpClient smtp = new SmtpClient();
-                //smtp.Host = "smtp.gmail.com";
-                //smtp.Port = 587;
-                //smtp.EnableSsl = true;
-                smtp.Host = "smtp.office365.com";
+                smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
+                //smtp.Host = "smtp.office365.com";
+                //smtp.Port = 587;
+                //smtp.EnableSsl = true;
 
-                NetworkCredential nc = new NetworkCredential("Jonitapc_quimind@Hotmail.com", "Jonit@pc1985");
+                NetworkCredential nc = new NetworkCredential("johmstone@gmail.com", "Jonitapc1985N");
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = nc;
                 smtp.Send(mm);

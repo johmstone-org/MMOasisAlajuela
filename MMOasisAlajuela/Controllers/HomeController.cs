@@ -36,6 +36,7 @@ namespace MMOasisAlajuela.Controllers
             else
             {
                 ViewBag.Class = MainClass;
+                ViewBag.LabelMenu = AppBL.LabelMenu(MainClass).ToString();
             }
             return View(data.ToList());
 

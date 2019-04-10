@@ -22,11 +22,11 @@ namespace MMOasisAlajuela.Models
     public class RegisterStep1Model
     {
         [Required]
-        [Display(Name = "Full Name")]
+        [Display(Name = "Nombre Completo")]
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "Usuario")]
         public string UserName { get; set; }
 
         [Required]
@@ -39,11 +39,11 @@ namespace MMOasisAlajuela.Models
     public class RegisterStep2Model
     {
         [Required]
-        [Display(Name = "Full Name")]
+        [Display(Name = "Nombre Completo")]
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "Usuario")]
         public string UserName { get; set; }
 
         [Required]
