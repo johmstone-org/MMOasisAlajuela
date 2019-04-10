@@ -216,6 +216,56 @@ namespace DAL
             return UserList;
         }
 
+        public List<Users> CheckEmailAvailability(string Email)
+        {
+            var UserList = new List<Users>();
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspCheckAvailabilityEmail]", SqlCon);
+                    SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                    //Insert Parameters
+                    SqlParameter ParEmail = new SqlParameter
+                    {
+                        ParameterName = "@Email",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = Email
+                    };
+                    SqlCmd.Parameters.Add(ParEmail);
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var User = new Users
+                            {
+                                UserID = Convert.ToInt32(dr["UserID"]),
+                                UserName = dr["UserName"].ToString(),
+                                FullName = dr["FullName"].ToString(),
+                                Email = dr["Email"].ToString()
+                            };
+
+                            UserList.Add(User);
+
+                        }
+                    }
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return UserList;
+        }
+
         public bool AddNewUser(Users User, string InsertUser)
         {
             bool rpta = false;
