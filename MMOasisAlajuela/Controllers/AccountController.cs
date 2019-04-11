@@ -99,15 +99,30 @@ namespace MMOasisAlajuela.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegisterStep1(RegisterStep1Model modelstep1)
         {
-            var data = UserBL.CheckUserNameAvailability(modelstep1.UserName);
+            var ValidationUserName = UserBL.CheckUserNameAvailability(modelstep1.UserName);
+            var ValidationEmail = UserBL.CheckEmailAvailability(modelstep1.Email);
 
-            if(data.Count == 0)
+            if(ValidationUserName.Count == 0 && ValidationEmail.Count == 0)
             {
                 return RedirectToAction("RegisterStep2", "Account", new { fullname = modelstep1.FullName, username = modelstep1.UserName, email = modelstep1.Email });
             }
             else
             {
-                this.ModelState.AddModelError(String.Empty, "Este nombre de usuario ya se encuentra registrado, por favor trate con otro.");
+                if (ValidationUserName.Count > 0 && ValidationEmail.Count > 0)
+                {
+                    this.ModelState.AddModelError(String.Empty, "Este nombre de usuario y este email ya se encuentran registrados, por favor intente con otro correo y otro nombre de usuario.");
+                }
+                else
+                {
+                    if (ValidationUserName.Count > 0)
+                    {
+                        this.ModelState.AddModelError(String.Empty, "Este nombre de usuario ya se encuentra registrado, por favor intente con otro nombre de usuario.");
+                    }
+                    else
+                    {
+                        this.ModelState.AddModelError(String.Empty, "Este correo electrónico ya se encuentra registrado, por favor intente con otro email.");
+                    }
+                }
             }
 
             return View(modelstep1);

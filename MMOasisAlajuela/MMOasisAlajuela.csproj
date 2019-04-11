@@ -206,6 +206,7 @@
     <Content Include="images\pic02.jpg" />
     <Content Include="images\pic03.jpg" />
     <Content Include="images\pic04.jpg" />
+    <Content Include="images\profile.png" />
     <Content Include="images\slide01.jpg" />
     <Content Include="images\slide02.jpg" />
     <Content Include="images\slide03.jpg" />

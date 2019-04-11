@@ -2062,7 +2062,7 @@
 /* Form */
 
 	form {
-		margin: 0 0 2rem 0;
+		margin: 0 0 0 0;
 	}
 
 	label {
@@ -4442,3 +4442,5 @@
 	#LogoutLink:hover{
 		color: rgb(255, 255, 255);
 	}
+
+    
