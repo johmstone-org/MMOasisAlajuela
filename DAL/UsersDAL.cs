@@ -333,5 +333,79 @@ namespace DAL
             }
             return rpta;
         }
+
+        public List<Users> UsersList()
+        {
+            var UserList = new List<Users>();
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[adm].[uspReadUsers]", SqlCon);
+                    SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var User = new Users
+                            {
+                                UserID = Convert.ToInt32(dr["UserID"]),
+                                UserName = dr["UserName"].ToString(),
+                                FullName = dr["FullName"].ToString(),
+                                Email = dr["Email"].ToString(),
+                                ActiveFlag = Convert.ToBoolean(dr["ActiveFlag"]),
+                                AuthorizationFlag = Convert.ToBoolean(dr["AuthorizationFlag"])
+                            };
+                            if (!Convert.IsDBNull(dr["RoleID"]))
+                            {
+                                User.RoleID = Convert.ToInt32(dr["RoleID"]);
+                            }
+                            else
+                            {
+                                User.RoleID = null;
+                            }
+
+                            UserList.Add(User);
+                        }
+                    }
+                    foreach (var u in UserList)
+                    {
+                        if (u.RoleID >= 1)
+                        {
+                            SqlCmd = new SqlCommand("[adm].[uspSearchRole]", SqlCon);
+                            SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                            //Insert Parameters
+                            SqlCmd.Parameters.AddWithValue("@RoleID", u.RoleID);
+
+                            using (var dr = SqlCmd.ExecuteReader())
+                            {
+                                dr.Read();
+                                if (dr.HasRows)
+                                {
+                                    u.RolesData.RoleID = Convert.ToInt32(dr["RoleID"]);
+                                    u.RolesData.RoleName = dr["RoleName"].ToString();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            u.RolesData = new Roles();
+                        }
+                    }
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return UserList;
+        }
     }
 }

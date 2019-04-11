@@ -3,19 +3,7 @@
     ViewBag.Title = "Perfil del Rol";
 }
 
-<!DOCTYPE HTML>
-
-<link href="~/Content/Site.css" rel="stylesheet" />
-
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title - @ViewBag.RoleName</h1>
-            </hgroup>
-        </div>
-    </section>
-}
+<h2>@ViewBag.Title - @ViewBag.RoleName</h2>
 
 <table class="table">
     <tr>
@@ -48,7 +36,7 @@
             </td>
             <td>
                 <form method="post" action='@Url.Action("ActiveFlag",new { profileid = item.RARProfileID, roleid = ViewBag.RoleID, appid = item.ApplicationID, status = item.Status })'>
-                    <input id="ChangeStatus" type="submit" value="Cambiar de Status" />
+                    <input id="ChangeStatus" type="submit" value="Cambiar de Status" class="button small"/>
                 </form>
             </td>
         </tr>
@@ -56,5 +44,5 @@
 
 </table>
 <p>
-    @Html.ActionLink("Regresar a la lista...", "Index", new { controller = "Roles" })
+    @Html.ActionLink("Regresar a la lista...", "Index", new { controller = "Roles" }, new { @class = "button alt"})
 </p>

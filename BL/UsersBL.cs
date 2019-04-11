@@ -42,6 +42,11 @@ namespace BL
             return UserDAL.CheckEmailAvailability(Email);
         }
 
+        public List<Users> UsersList()
+        {
+            return UserDAL.UsersList();
+        }
+
         public bool AddNewUser(Users user, string insertuser)
         {
             return UserDAL.AddNewUser(user,insertuser);

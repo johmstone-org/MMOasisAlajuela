@@ -5,12 +5,13 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
-        <ul class="links">
-            <li>
-                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", id = "ManageLink" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()" id="LogoutLink">Cerrar Sesión</a></li>
-        </ul>
+    <ul class="links">
+        <li>
+            @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", id = "ManageLink" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" id="LogoutLink">Cerrar Sesión</a></li>
+        <li>@Html.ActionLink("Menu Principal", "Index", new { controller = "Home" }, htmlAttributes: new { id = "MainMenuLink" })</li>
+    </ul>
     }
 }
 else
