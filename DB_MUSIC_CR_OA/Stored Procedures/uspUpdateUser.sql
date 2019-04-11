@@ -1,8 +1,8 @@
 ﻿-- ======================================================================
--- Name: [adm].[uspAddUser]
--- Desc: Se utiliza para la creación de nuevos usuarios
+-- Name: [adm].[uspUpdateUser]
+-- Desc: Se utiliza para actualizar la información de un usuario
 -- Auth: Jonathan Piedra jonitapc_quimind@hotmail.com
--- Date: 3/26/2019
+-- Date: 4/11/2019
 -------------------------------------------------------------
 -- Change History
 -------------------------------------------------------------
@@ -10,13 +10,13 @@
 -- --	----		------		-----------------------------
 -- ======================================================================
 
-CREATE PROCEDURE [adm].[uspAddUser]
-	@InsertUser	VARCHAR(50),
-	@FullName	VARCHAR(50),
-	@UserName	VARCHAR(50),
-	@Email		VARCHAR(50),
-	@Password	NVARCHAR(50),
-	@RoleID		INT	= NULL
+CREATE PROCEDURE [adm].[uspUpdateUser]
+	@ActionType		VARCHAR(6),
+	@InsertUser		VARCHAR(50),
+	@UserID			INT,
+	@FullName		VARCHAR(50)	=	NULL,
+	@RoleID			INT			=	NULL,
+	@ActiveFlag		BIT			=	NULL
 AS 
     BEGIN
         SET NOCOUNT ON
@@ -35,15 +35,35 @@ AS
                 END
 
             -- =======================================================
-				IF(@RoleID IS NULL)
+				IF(@ActionType = 'GUDP')		-- GUDP = General Update
 					BEGIN
-						INSERT INTO [adm].[utbUsers] ([FullName],[UserName],[Email],[PasswordHash],[RoleID],[CreationUser],[LastModifyUser])
-						VALUES (@FullName, @UserName,@Email,HASHBYTES('SHA2_512',@Password), @RoleID,@InsertUser,@InsertUser)
+						UPDATE	[adm].[utbUsers]
+						SET		[FullName]		=	@FullName,
+								[RoleID]		=	@RoleID,
+								[ActiveFlag]	=	@ActiveFlag,
+								[LastModifyUser]=	@InsertUser,
+								[LastModifyDate]=	GETDATE()
+						WHERE	[UserID]	=	@UserID
 					END
 				ELSE
 					BEGIN
-						INSERT INTO [adm].[utbUsers] ([FullName],[UserName],[Email],[PasswordHash],[RoleID],[AuthorizationFlag],[CreationUser],[LastModifyUser])
-						VALUES (@FullName, @UserName,@Email,HASHBYTES('SHA2_512',@Password),@RoleID,1,@InsertUser,@InsertUser)
+						IF(@ActionType = 'MS')	-- MS = Modify Status - ActiveFlag
+							BEGIN
+								UPDATE	[adm].[utbUsers]
+								SET		[ActiveFlag]	=	@ActiveFlag,
+										[LastModifyUser]=	@InsertUser,
+										[LastModifyDate]=	GETDATE()
+								WHERE	[UserID]	=	@UserID
+							END
+						ELSE					-- Authorizations
+							BEGIN
+								UPDATE	[adm].[utbUsers]
+								SET		[RoleID]			=	@RoleID,
+										[AuthorizationFlag]	=	1,
+										[LastModifyUser]	=	@InsertUser,
+										[LastModifyDate]	=	GETDATE()
+								WHERE	[UserID]	=	@UserID
+							END
 					END
 			-- =======================================================
 

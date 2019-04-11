@@ -51,5 +51,16 @@ namespace BL
         {
             return UserDAL.AddNewUser(user,insertuser);
         }
+
+        public Users Details(int id)
+        {
+            return UserDAL.Details(id);
+        }
+
+        public bool UpdateUser (Users user, string insertuser)
+        {
+            return UserDAL.UpdateUser(user, insertuser);
+        }
+
     }
 }

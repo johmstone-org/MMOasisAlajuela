@@ -9,20 +9,22 @@ namespace ET
 {
     public class Users
     {
+        public string ActionType { get; set; }
+
         [Key]
         [Required]
         public int UserID { get; set; }
 
-        [Required]
-        [Display(Name = "Full Name")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [Display(Name = "Nombre Completo")]
         public string FullName { get; set; }
 
-        [Required]
-        [Display(Name = "User Name")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [Display(Name = "Usuario")]
         public string UserName { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [EmailAddress(ErrorMessage = "Formato de correo invalido. Por favor ingrese un correo electrónico valido")]
         [Display(Name ="Email")]
         public string Email { get; set; }
 
@@ -37,7 +39,8 @@ namespace ET
         [Display(Name = "Role")]
         public int? RoleID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,20}$",ErrorMessage = "Contraseña invalida, debe tener entre 6 - 20 caracteres y contener al menos un número y una mayúscula")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }

@@ -94,6 +94,8 @@
     <Build Include="Stored Procedures\uspCheckAvailabilityEmail.sql" />
     <Build Include="Stored Procedures\uspReadUsers.sql" />
     <Build Include="Stored Procedures\uspSearchRole.sql" />
+    <Build Include="Stored Procedures\uspSearchUser.sql" />
+    <Build Include="Stored Procedures\uspUpdateUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />
