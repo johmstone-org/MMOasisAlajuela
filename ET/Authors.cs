@@ -13,12 +13,15 @@ namespace ET
         [Required]
         public int AuthorID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         [Display(Name ="Autor")]
         public string AuthorName { get; set; }
 
-        [Required]
-        [Display(Name ="Status")]
-        public bool ActiveFlag { get; set; }
+        [Display(Name ="Perfil")]
+        public string  ProfileLink { get; set; }
+
+        public bool ActiveLink { get; set; }
+
+        public string ActionType { get; set; }
     }
 }

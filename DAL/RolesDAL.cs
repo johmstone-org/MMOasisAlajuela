@@ -22,8 +22,10 @@ namespace DAL
                 using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
                 {
                     SqlCon.Open();
-                    var SqlCmd = new SqlCommand("[adm].[uspReadRoles]", SqlCon);
-                    SqlCmd.CommandType = CommandType.StoredProcedure;
+                    var SqlCmd = new SqlCommand("[adm].[uspReadRoles]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
 
                     using (var dr = SqlCmd.ExecuteReader())
                     {
@@ -62,28 +64,36 @@ namespace DAL
                 using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
                 {
                     SqlCon.Open();
-                    var SqlCmd = new SqlCommand("[adm].[uspCreateRole]", SqlCon);
-                    SqlCmd.CommandType = CommandType.StoredProcedure;
+                    var SqlCmd = new SqlCommand("[adm].[uspCreateRole]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
 
                     //Insert Parameters
-                    SqlParameter ParName = new SqlParameter();
-                    ParName.ParameterName = "@RoleName";
-                    ParName.SqlDbType = SqlDbType.VarChar;
-                    ParName.Size = 50;
-                    ParName.Value = Role.RoleName;
+                    SqlParameter ParName = new SqlParameter
+                    {
+                        ParameterName = "@RoleName",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = Role.RoleName
+                    };
                     SqlCmd.Parameters.Add(ParName);
 
-                    SqlParameter ParDescription = new SqlParameter();
-                    ParDescription.ParameterName = "@Description";
-                    ParDescription.SqlDbType = SqlDbType.VarChar;
-                    ParDescription.Value = Role.RoleDescription;
+                    SqlParameter ParDescription = new SqlParameter
+                    {
+                        ParameterName = "@Description",
+                        SqlDbType = SqlDbType.VarChar,
+                        Value = Role.RoleDescription
+                    };
                     SqlCmd.Parameters.Add(ParDescription);
 
-                    SqlParameter ParInsertUser = new SqlParameter();
-                    ParInsertUser.ParameterName = "@InsertUser";
-                    ParInsertUser.SqlDbType = SqlDbType.VarChar;
-                    ParInsertUser.Size = 50;
-                    ParInsertUser.Value = InsertUser;
+                    SqlParameter ParInsertUser = new SqlParameter
+                    {
+                        ParameterName = "@InsertUser",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = InsertUser
+                    };
                     SqlCmd.Parameters.Add(ParInsertUser);
 
                     //Exec Command
@@ -110,8 +120,10 @@ namespace DAL
                 using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
                 {
                     SqlCon.Open();
-                    var SqlCmd = new SqlCommand("[adm].[uspUpdateRole]", SqlCon);
-                    SqlCmd.CommandType = CommandType.StoredProcedure;
+                    var SqlCmd = new SqlCommand("[adm].[uspUpdateRole]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
 
                     //Insert Parameters
                     SqlParameter ParInsertUser = new SqlParameter

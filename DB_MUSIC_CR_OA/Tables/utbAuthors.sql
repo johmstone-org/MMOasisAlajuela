@@ -2,6 +2,7 @@
 (
 	[AuthorID]		 INT           IDENTITY (1, 1) NOT NULL,
     [AuthorName]     VARCHAR (100) NOT NULL,
+	[ProfileLink]	 VARCHAR (MAX) NULL,
     [ActiveFlag]     BIT           CONSTRAINT [utbAuthorsDefaultActiveFlagTrue] DEFAULT ((1)) NOT NULL,
     [InsertDate]     DATETIME      CONSTRAINT [utbAuthorsDefaultInsertDateSysDateTime] DEFAULT (sysdatetime()) NOT NULL,
     [InsertUser]     VARCHAR (100) CONSTRAINT [utbAuthorsDefaultInsertUserSuser_sSame] DEFAULT (suser_sname()) NOT NULL,
@@ -72,6 +73,15 @@ EXECUTE sp_addextendedproperty
 @level0type = N'SCHEMA', @level0name = N'usr', 
 @level1type = N'TABLE', @level1name = N'utbAuthors', 
 @level2type = N'COLUMN', @level2name = N'AuthorName';			 
+
+
+GO
+EXECUTE sp_addextendedproperty 
+@name = N'MS_Description', 
+@value = N'Link del perfil del autor.', 
+@level0type = N'SCHEMA', @level0name = N'usr', 
+@level1type = N'TABLE', @level1name = N'utbAuthors', 
+@level2type = N'COLUMN', @level2name = N'ProfileLink';	
 
 
 GO

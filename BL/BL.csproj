@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDirectoryBL.cs" />
+    <Compile Include="AuthorsBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesBL.cs" />
     <Compile Include="UsersBL.cs" />

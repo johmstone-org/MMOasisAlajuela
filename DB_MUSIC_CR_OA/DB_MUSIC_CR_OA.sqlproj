@@ -96,6 +96,10 @@
     <Build Include="Stored Procedures\uspSearchRole.sql" />
     <Build Include="Stored Procedures\uspSearchUser.sql" />
     <Build Include="Stored Procedures\uspUpdateUser.sql" />
+    <Build Include="Stored Procedures\uspReadAuthors.sql" />
+    <Build Include="Stored Procedures\uspAddAuthor.sql" />
+    <Build Include="Stored Procedures\uspUpdateAuthor.sql" />
+    <Build Include="Stored Procedures\uspSearchAuthor.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />

@@ -498,6 +498,7 @@ namespace DAL
                             }
                         }
                     }
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
                 }
             }
             catch (Exception ex)

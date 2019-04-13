@@ -16,7 +16,22 @@ namespace MMOasisAlajuela.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View();
+                var data = from p in AppBL.AppProfilebyUser(User.Identity.Name)
+                           select p.MainClass;
+
+                var FinalData = data.Distinct();
+
+                List<AppDirectory> MainMenu = new List<AppDirectory>();
+
+                foreach(var item in FinalData)
+                {
+                    AppDirectory r = new AppDirectory();
+                    r.RARProfileID = Convert.ToInt32(MainMenu.Count()) + 2;
+                    r.MainClass = item;
+                    MainMenu.Add(r);
+                }
+
+                return View(MainMenu.ToList());
             }
             else
             {
@@ -24,7 +39,7 @@ namespace MMOasisAlajuela.Controllers
             }
         }
                                                     
-        public ActionResult _MainMenu(string MainClass)
+        public ActionResult _MainMenu(string MainClass, int ImagePathNumber)
         {
             var data = from p in AppBL.AppProfilebyUser(User.Identity.Name)
                        where p.MainClass == MainClass
@@ -37,6 +52,14 @@ namespace MMOasisAlajuela.Controllers
             {
                 ViewBag.Class = MainClass;
                 ViewBag.LabelMenu = AppBL.LabelMenu(MainClass).ToString();
+                if (ImagePathNumber >= 10)
+                {
+                    ViewBag.ImagePath = "pic" + ImagePathNumber.ToString() + ".jpg";
+                }
+                else
+                {
+                    ViewBag.ImagePath = "pic0" + ImagePathNumber.ToString() + ".jpg";
+                }
             }
             return View(data.ToList());
 
