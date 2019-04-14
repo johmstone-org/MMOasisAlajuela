@@ -2,7 +2,9 @@
 
 @using GridMvc.Html;
 
-
+@{
+    ViewBag.Title = "Autores";
+}
 
 <link href="~/Content/Gridmvc.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -20,25 +22,30 @@
         window.open(url, '_blank');
     }
 </script>
+
+<h2>@ViewBag.Title</h2>
 <div>
-    <a id="BtnNew" class="button small" href="#" onclick="CreateNew();">Agregar nuevo Autor</a>
-</div>
-<div class="code-cut" style="width: 90%; font-size: 15px;">
-    @Html.Grid(Model).Columns(Columns =>
-{
-    Columns.Add(c => c.AuthorName).Titled("Nombre del Autor").Filterable(true);
-    Columns.Add()
-        .Encoded(false)
-        .Sanitized(false)
-        .RenderValueAs(c => Html.ActionLink("Editar", "Edit", new { id = c.AuthorID }));
-    Columns.Add()
-        .Titled("Perfil")
-        .Encoded(false)
-        .Sanitized(false)
-        .RenderValueAs(c => c.ActiveLink? new HtmlString("<a id='ProfileLink' href='#' onclick='OpenLink(" + c.ProfileLink.ToString() + ");'>Perfil</a>") : new HtmlString("<p>No disponible</p>"));
-    Columns.Add()
-        .Encoded(false)
-        .Sanitized(false)
-        .RenderValueAs(c => Html.ActionLink("Repertorio Interno", "Details", new { id = c.AuthorID }));
-}).WithPaging(10).Sortable(true)
+    <hr />
+    <div>
+        <a id="BtnNew" class="button small" href="#" onclick="CreateNew();">Agregar nuevo Autor</a>
+    </div>
+    <div class="code-cut" style="width: 90%; font-size: 15px;">
+        @Html.Grid(Model).Columns(Columns =>
+        {
+            Columns.Add(c => c.AuthorName).Titled("Nombre del Autor").Filterable(true);
+            Columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(c => Html.ActionLink("Editar", "Edit", new { id = c.AuthorID }));
+            Columns.Add()
+                .Titled("Perfil")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(c => c.ActiveLink ? new HtmlString("<a id='ProfileLink' href='#' onclick='OpenLink(" + c.ProfileLink.ToString() + ");'>Perfil</a>") : new HtmlString("<p>No disponible</p>"));
+            Columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(c => Html.ActionLink("Repertorio Interno", "Details", new { id = c.AuthorID }));
+        }).WithPaging(10).Sortable(true)
+    </div>
 </div>

@@ -46,6 +46,7 @@
     <Compile Include="AuthorsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesDAL.cs" />
+    <Compile Include="SongsDAL.cs" />
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>
   <ItemGroup>

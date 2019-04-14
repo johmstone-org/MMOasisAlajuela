@@ -45,6 +45,7 @@
     <Compile Include="AuthorsBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesBL.cs" />
+    <Compile Include="SongsBL.cs" />
     <Compile Include="UsersBL.cs" />
   </ItemGroup>
   <ItemGroup>

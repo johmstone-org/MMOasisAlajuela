@@ -11,18 +11,14 @@ namespace ET
     {
         [Key]
         public int SongID { get; set; }
-        
-        [Required]
-        [Display(Name ="Canción")]
-        public string SongName { get; set; }
 
         [Required]
-        [Display(Name ="Autor")]
+        [Display(Name = "Autor")]
         public int AuthorID { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public bool ActiveFlag { get; set; }
+        [Display(Name ="Canción")]
+        public string SongName { get; set; }
 
         public List<Authors> AuthorList { get; set; }
 
