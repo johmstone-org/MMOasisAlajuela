@@ -73,7 +73,6 @@
     <Build Include="Tables\utbSongs.sql" />
     <Build Include="Tables\utbAuthors.sql" />
     <Build Include="Tables\utbMusicSheets.sql" />
-    <Build Include="Tables\utbMusicSheetsHistory.sql" />
     <Build Include="Stored Procedures\uspReadRoles.sql" />
     <Build Include="Stored Procedures\uspAddUser.sql" />
     <Build Include="Stored Procedures\uspLogin.sql" />
@@ -101,6 +100,16 @@
     <Build Include="Stored Procedures\uspUpdateAuthor.sql" />
     <Build Include="Stored Procedures\uspSearchAuthor.sql" />
     <Build Include="Stored Procedures\uspSongsbyAuthor.sql" />
+    <Build Include="Stored Procedures\uspReadMusicSheetsbySong.sql" />
+    <Build Include="Stored Procedures\uspAddMusicSheet.sql" />
+    <Build Include="Stored Procedures\uspReadMusicSheets.sql" />
+    <Build Include="Stored Procedures\uspSearchMSTypes.sql" />
+    <Build Include="Stored Procedures\uspSearchSong.sql" />
+    <Build Include="Stored Procedures\uspSearchInstrument.sql" />
+    <Build Include="Stored Procedures\uspReadSongs.sql" />
+    <Build Include="Stored Procedures\uspReadInstruments.sql" />
+    <Build Include="Stored Procedures\uspReadMSTypes.sql" />
+    <Build Include="Stored Procedures\uspAddSong.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />

@@ -23,6 +23,10 @@ namespace ET
         public int SongID { get; set; }
 
         [Required]
+        [Display(Name = "Versión")]
+        public string Version { get; set; }
+
+        [Required]
         [Display(Name ="Instrumento")]
         public int InstrumentID { get; set; }
 
@@ -35,12 +39,38 @@ namespace ET
         public string FileName { get; set; }
 
         [Required]
-        [Display(Name ="Archivo")]   
-        public HttpPostedFile FileData { get; set; }
+        [Display(Name = "Archivo")]
+        public byte[] FileData { get; set; }
 
-        [Required]
-        [Display(Name = "Status")]
-        public bool ActiveFlag { get; set; }
+        [Required(ErrorMessage = "Por favor seleccione el archivo")]
+        [DataType(DataType.Upload)]
+        [Display(Name = "Archivo")]
+        public HttpPostedFileBase files { get; set; }
 
+        public MusicSheetTypes MSTypesData { get; set; }
+
+        public Songs SongsData { get; set; }
+
+        public Instruments InstrumentsData { get; set; }
+
+        public MusicSheets()
+        {
+            MSTypesData = new MusicSheetTypes();
+            SongsData = new Songs();
+            InstrumentsData = new Instruments();
+        }
+
+        public List<MusicSheetTypes> MSTypeList { get; set; }
+        public List<Songs> SongList { get; set; }
+        public List<Instruments> InstrumentList { get; set; }
+
+        public List<string> Tonalities()
+        {
+            return new List<string>
+            {
+                "C","D","E","F","G","A","B","C#","D#","F#","G#","A#","Db","Eb","Gb","Ab","Bb"
+
+            };
+        }
     }
 }

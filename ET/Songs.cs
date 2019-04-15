@@ -28,5 +28,7 @@ namespace ET
         {
             AuthorsData = new Authors();
         }
+
+        public string ActionType { get; set; }
     }
 }

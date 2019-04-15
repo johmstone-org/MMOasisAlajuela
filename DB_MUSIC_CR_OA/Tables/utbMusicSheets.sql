@@ -3,6 +3,7 @@
 	[MSID]			 INT			IDENTITY (1,1) NOT NULL,
 	[MSTypeID]		 INT			NOT NULL,
 	[SongID]		 INT			NOT NULL,
+	[Version]		 VARCHAR(MAX)   NULL,
 	[InstrumentID]	 INT			NOT NULL,
 	[Tonality]		 VARCHAR(10)	NOT NULL,
 	[FileName]		 VARCHAR(100)	NOT NULL,
@@ -16,7 +17,7 @@
 	CONSTRAINT [fk.usr.utbMusicSheetTypes.usr.utbMusicSheets.MSTypeID] FOREIGN KEY ([MSTypeID]) REFERENCES [usr].[utbMusicSheetTypes] ([MSTypeID]),
 	CONSTRAINT [fk.usr.utbSongs.usr.utbMusicSheets.SongID] FOREIGN KEY ([SongID]) REFERENCES [usr].[utbSongs] ([SongID]),
 	CONSTRAINT [fk.usr.utbInstruments.usr.utbMusicSheets.InstrumentID] FOREIGN KEY ([InstrumentID]) REFERENCES [usr].[utbInstruments] ([InstrumentID])
-);
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 
 
 GO
@@ -43,6 +44,15 @@ EXECUTE sp_addextendedproperty
 @level0type = N'SCHEMA', @level0name = N'usr', 
 @level1type = N'TABLE', @level1name = N'utbMusicSheets', 
 @level2type = N'COLUMN', @level2name = N'SongID';			 
+
+
+GO
+EXECUTE sp_addextendedproperty 
+@name = N'MS_Description', 
+@value = N'Version en la cual se baso la partitura o el documento.', 
+@level0type = N'SCHEMA', @level0name = N'usr', 
+@level1type = N'TABLE', @level1name = N'utbMusicSheets', 
+@level2type = N'COLUMN', @level2name = N'Version';	
 
 
 GO

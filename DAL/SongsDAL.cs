@@ -42,7 +42,7 @@ namespace DAL
                         {
                             var song = new Songs
                             {
-                                SongID = Convert.ToInt32(dr["AuthorID"]),
+                                SongID = Convert.ToInt32(dr["SongID"]),
                                 SongName = dr["SongName"].ToString(),
                                 AuthorID = Convert.ToInt32(dr["AuthorID"])
                             };
@@ -59,6 +59,121 @@ namespace DAL
                 throw;
             }
             return Repertoire;
+        }
+
+        public List<Songs> SongList()
+        {
+            List<Songs> List = new List<Songs>();
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspReadSongs]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var song = new Songs
+                            {
+                                SongID = Convert.ToInt32(dr["SongID"]),
+                                SongName = dr["SongName"].ToString(),
+                                AuthorID = Convert.ToInt32(dr["AuthorID"])
+                            };
+
+                            List.Add(song);
+
+                        }
+                    }
+                    foreach(var u in List)
+                    {
+                        SqlCmd = new SqlCommand("[usr].[uspSearchAuthor]", SqlCon)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
+
+                        SqlCmd.Parameters.AddWithValue("@AuthorID", u.AuthorID);
+
+                        using (var dr = SqlCmd.ExecuteReader())
+                        {
+                            dr.Read();
+                            if (dr.HasRows)
+                            {
+                                u.AuthorsData.AuthorID = Convert.ToInt32(dr["AuthorID"]);
+                                u.AuthorsData.AuthorName = dr["AuthorName"].ToString();
+                            }
+                        }
+                    }
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return List;
+        }
+
+        public bool AddNew(Songs Song, string InsertUser)
+        {
+            bool rpta = false;
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspAddSong]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    //Insert Parameters
+                    SqlParameter ParInsertUser = new SqlParameter
+                    {
+                        ParameterName = "@InsertUser",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = InsertUser
+                    };
+                    SqlCmd.Parameters.Add(ParInsertUser);
+
+                    SqlParameter ParFullName = new SqlParameter
+                    {
+                        ParameterName = "@SongName",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = Song.SongName
+                    };
+                    SqlCmd.Parameters.Add(ParFullName);
+
+                    SqlParameter ParRoleID = new SqlParameter
+                    {
+                        ParameterName = "@AuthorID",
+                        SqlDbType = SqlDbType.VarChar,
+                        Value = Song.AuthorID
+                    };
+                    SqlCmd.Parameters.Add(ParRoleID);
+
+                    //EXEC Command
+                    SqlCmd.ExecuteNonQuery();
+
+                    rpta = true;
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return rpta;
         }
     }
 }

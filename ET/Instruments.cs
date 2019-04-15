@@ -16,8 +16,5 @@ namespace ET
         [Display(Name ="Instrumento")]
         public string Instrument { get; set; }
 
-        [Required]
-        [Display(Name = "Status")]
-        public bool ActiveFlag { get; set; }
     }
 }

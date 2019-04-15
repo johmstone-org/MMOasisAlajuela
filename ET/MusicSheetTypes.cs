@@ -16,8 +16,5 @@ namespace ET
         [Display(Name ="Tipo de documento")]
         public string MSTypeName { get; set; }
 
-        [Required]
-        [Display(Name = "Status")]
-        public bool ActiveFlag { get; set; }
     }
 }

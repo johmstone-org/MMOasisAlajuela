@@ -122,7 +122,7 @@ namespace MMOasisAlajuela.Controllers
         }
 
         // GET: /Authors/Details/1
-        public ActionResult Details (int id=0)
+        public ActionResult Details (int id = 0)
         {
             if (Request.IsAuthenticated)
             {

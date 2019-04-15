@@ -6,5 +6,11 @@
     <DeployScriptFileName>DB_MUSIC_CR_OA.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=igleoamusica.database.windows.net;Persist Security Info=True;User ID=jpiedra;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
+    <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
+    <DropObjectsNotInSource>False</DropObjectsNotInSource>
+    <DoNotDropTables>False</DoNotDropTables>
+    <DoNotDropServerTriggers>False</DoNotDropServerTriggers>
+    <DoNotDropStoredProcedures>False</DoNotDropStoredProcedures>
+    <DoNotDropViews>False</DoNotDropViews>
   </PropertyGroup>
 </Project>

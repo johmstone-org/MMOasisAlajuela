@@ -16,5 +16,15 @@ namespace BL
         {
             return SongsDAL.Repertoires(authorid);
         }
+
+        public List<Songs> SongList ()
+        {
+            return SongsDAL.SongList();
+        }
+
+        public bool AddNew(Songs song, string insertuser)
+        {
+            return SongsDAL.AddNew(song, insertuser);
+        }
     }
 }
