@@ -49,24 +49,7 @@ namespace DAL
                             u.MSTypesData.MSTypeName = dr["MSTypeName"].ToString();
                         }
                     }
-                    // Insert Song information
-                    //SqlCmd = new SqlCommand("[usr].[uspSearchSong]", SqlCon)
-                    //{
-                    //    CommandType = CommandType.StoredProcedure
-                    //};
-
-                    //SqlCmd.Parameters.AddWithValue("@SongID", u.SongID);
-
-                    //using (var dr = SqlCmd.ExecuteReader())
-                    //{
-                    //    dr.Read();
-                    //    if (dr.HasRows)
-                    //    {
-                    //        u.SongsData.SongID = Convert.ToInt32(dr["SongID"]);
-                    //        u.SongsData.SongName = dr["SongName"].ToString();
-                    //    }
-                    //}
-
+                    
                     // Insert Instrument information
                     SqlCmd = new SqlCommand("[usr].[uspSearchInstrument]", SqlCon)
                     {
@@ -142,6 +125,45 @@ namespace DAL
                 SqlCon.Open();
                 
                 Charts = SqlMapper.Query<MusicSheets>(SqlCon, "[usr].[uspReadMusicSheets]", commandType: CommandType.StoredProcedure).ToList();
+
+                foreach (var u in Charts)
+                {
+                    // Insert Music Types Information
+                    var SqlCmd = new SqlCommand("[usr].[uspSearchMSTypes]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    SqlCmd.Parameters.AddWithValue("@MSTypeID", u.MSTypeID);
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            u.MSTypesData.MSTypeID = Convert.ToInt32(dr["MSTypeID"]);
+                            u.MSTypesData.MSTypeName = dr["MSTypeName"].ToString();
+                        }
+                    }
+
+                    // Insert Instrument information
+                    SqlCmd = new SqlCommand("[usr].[uspSearchInstrument]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    SqlCmd.Parameters.AddWithValue("@InstrumentID", u.InstrumentID);
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            u.InstrumentsData.InstrumentID = Convert.ToInt32(dr["InstrumentID"]);
+                            u.InstrumentsData.Instrument = dr["Instrument"].ToString();
+                        }
+                    }
+                }
 
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
 

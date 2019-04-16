@@ -34,7 +34,7 @@
         @Html.Grid(Model).Columns(Columns =>
            {
                Columns.Add(c => c.SongName).Titled("Titulo").Filterable(true);
-               Columns.Add(c => c.AuthorsData.AuthorName).Titled("Instrumento").Filterable(true);
+               Columns.Add(c => c.AuthorsData.AuthorName).Titled("Autor").Filterable(true);
                Columns.Add()
                 .Encoded(false)
                 .Sanitized(false)

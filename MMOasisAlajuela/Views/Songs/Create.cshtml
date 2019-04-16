@@ -16,6 +16,12 @@
         }
     });
 </script>
+<script type="text/javascript">
+    function Create() {
+        var url = '@Url.Action("Create", "Authors")';
+        window.open(url, '_blank' , 'left=100,top=100,width=500,height=650,toolbar=1,resizable=0');
+    }
+</script>
 
 <h2>@ViewBag.Title</h2>
 
@@ -31,6 +37,7 @@
             <div class="select-wrapper">
                 @Html.DropDownListFor(model => model.AuthorID, new SelectList(Model.AuthorList, "AuthorID", "AuthorName"), "Seleccione el Autor", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AuthorID, "", new { @class = "text-danger" })
+                <a id="BtnNew" class="button small alt" href="#" onclick="Create();">Agregar Autor</a>
             </div>
         </div>
 

@@ -29,6 +29,7 @@ AS
 						,[FileName]
 						,[FileData]
 				FROM	[usr].[utbMusicSheets]
+				ORDER BY [SongID],[InstrumentID]
 			-- =======================================================
 
         END TRY

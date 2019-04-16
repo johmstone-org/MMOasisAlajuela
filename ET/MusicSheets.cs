@@ -72,5 +72,7 @@ namespace ET
 
             };
         }
+
+        public string ActionType { get; set; }
     }
 }

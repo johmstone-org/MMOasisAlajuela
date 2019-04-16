@@ -25,6 +25,7 @@ AS
 						,[AuthorID]
 				FROM	[usr].[utbSongs]
 				WHERE	[ActiveFlag] = 1
+				ORDER BY [SongName]
 			-- =======================================================
 
         END TRY

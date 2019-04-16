@@ -20,7 +20,8 @@ namespace MMOasisAlajuela.Controllers
         // GET: MusicSheets
         public ActionResult Index()
         {
-            return View();
+            List<MusicSheets> Charts = MSBL.MSList();
+            return View(Charts.ToList());
         }
 
         public ActionResult MusicSheetsbySong (int SongID)
@@ -112,6 +113,66 @@ namespace MMOasisAlajuela.Controllers
 
             return File(FileById.FileData, "application/pdf", FileById.FileName);
             
+
+        }
+
+        public ActionResult Create()
+        {
+            MusicSheets Chart = new MusicSheets();
+
+            Chart.SongList = SongsBL.SongList().ToList();
+
+            Chart.MSTypeList = MSTBL.MSTypeList().ToList();
+
+            Chart.InstrumentList = IBL.InstrumentList().ToList();
+
+            return View(Chart);
+        }
+
+        [HttpPost]
+        public ActionResult Create(MusicSheets MS)
+        {
+
+            String FileExt = Path.GetExtension(MS.files.FileName).ToUpper();
+
+            if (FileExt == ".PDF")
+            {
+                Stream str = MS.files.InputStream;
+                BinaryReader Br = new BinaryReader(str);
+                Byte[] FileDet = Br.ReadBytes((Int32)str.Length);
+
+                MS.FileName = MS.files.FileName;
+                MS.FileData = FileDet;
+
+                string InsertUser = User.Identity.GetUserName();
+
+                var r = MSBL.AddNew(MS, InsertUser);
+
+                if (!r)
+                {
+                    ViewBag.Mensaje = "Ha ocurrido un error inesperado.";
+                    return View("~/Views/Shared/Error.cshtml");
+                }
+                else
+                {
+                    MS.ActionType = "CREATE";
+
+                    MS.SongList = SongsBL.SongList().ToList();
+
+                    MS.MSTypeList = MSTBL.MSTypeList().ToList();
+
+                    MS.InstrumentList = IBL.InstrumentList().ToList();
+
+                    return View(MS);
+                }
+            }
+            else
+            {
+
+                ViewBag.FileStatus = "Invalid file format.";
+                return View();
+
+            }
 
         }
     }

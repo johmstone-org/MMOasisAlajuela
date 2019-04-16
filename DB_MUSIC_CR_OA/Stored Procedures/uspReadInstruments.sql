@@ -24,6 +24,7 @@ AS
 						,[Instrument]
 				FROM	[usr].[utbInstruments]
 				WHERE	[ActiveFlag] = 1
+				ORDER BY [Instrument]
 			-- =======================================================
 
         END TRY
