@@ -316,6 +316,7 @@
     <Content Include="Views\Shared\_PupopLayout.cshtml" />
     <Content Include="Views\MusicSheets\Index.cshtml" />
     <Content Include="Views\MusicSheets\Create.cshtml" />
+    <Content Include="Views\MusicSheets\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

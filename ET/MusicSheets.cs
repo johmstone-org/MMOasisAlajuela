@@ -38,6 +38,8 @@ namespace ET
         [Display(Name ="Nombre")]
         public string FileName { get; set; }
 
+        public bool ActiveFlag { get; set; }
+
         [Required]
         [Display(Name = "Archivo")]
         public byte[] FileData { get; set; }

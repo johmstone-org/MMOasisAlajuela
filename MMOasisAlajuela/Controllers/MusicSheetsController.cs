@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.IO;
 using ET;
 using BL;
@@ -20,47 +21,71 @@ namespace MMOasisAlajuela.Controllers
         // GET: MusicSheets
         public ActionResult Index()
         {
-            List<MusicSheets> Charts = MSBL.MSList();
-            return View(Charts.ToList());
+            if (Request.IsAuthenticated)
+            {
+                List<MusicSheets> Charts = MSBL.MSList();
+                return View(Charts.ToList());
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+            
         }
 
         public ActionResult MusicSheetsbySong (int SongID)
         {
-            List<MusicSheets> Charts = MSBL.CaMusicSheetsbySong(SongID);
+            if (Request.IsAuthenticated)
+            {
+                List<MusicSheets> Charts = MSBL.CaMusicSheetsbySong(SongID);
 
-            var songname = from s in SongsBL.SongList()
-                           where s.SongID == SongID
-                           select s.SongName;
+                var songname = from s in SongsBL.SongList()
+                               where s.SongID == SongID
+                               select s.SongName;
 
-            ViewBag.SongID = SongID;
-            ViewBag.SongName = songname.FirstOrDefault().ToString();
+                ViewBag.SongID = SongID;
+                ViewBag.SongName = songname.FirstOrDefault().ToString();
 
-            return View(Charts.ToList());
+                return View(Charts.ToList());
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+            
         }
 
         public ActionResult CreatebySong(int SongID)
         {
-            MusicSheets Chart = new MusicSheets();
+            if (Request.IsAuthenticated)
+            {
+                MusicSheets Chart = new MusicSheets();
 
-            var songlist = from s in SongsBL.SongList()
-                       where s.SongID == SongID
-                       select s;
+                var songlist = from s in SongsBL.SongList()
+                               where s.SongID == SongID
+                               select s;
 
-            Chart.SongID = SongID;
+                Chart.SongID = SongID;
 
-            Chart.SongList = songlist.ToList();
+                Chart.SongList = songlist.ToList();
 
-            Chart.MSTypeList = MSTBL.MSTypeList().ToList();
+                Chart.MSTypeList = MSTBL.MSTypeList().ToList();
 
-            Chart.InstrumentList = IBL.InstrumentList().ToList();
+                Chart.InstrumentList = IBL.InstrumentList().ToList();
 
-            var SongName = from s in SongsBL.SongList()
-                           where s.SongID == SongID
-                           select s.SongName;
+                var SongName = from s in SongsBL.SongList()
+                               where s.SongID == SongID
+                               select s.SongName;
 
-            ViewBag.SongName = SongName.FirstOrDefault().ToString();
+                ViewBag.SongName = SongName.FirstOrDefault().ToString();
 
-            return View(Chart);
+                return View(Chart);
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+            
         }
 
         [HttpPost]
@@ -95,7 +120,7 @@ namespace MMOasisAlajuela.Controllers
             else
             {
 
-                ViewBag.FileStatus = "Invalid file format.";
+                ViewBag.FileStatus = "Archivo de formato Invalido.";
                 return View();
 
             }
@@ -118,15 +143,23 @@ namespace MMOasisAlajuela.Controllers
 
         public ActionResult Create()
         {
-            MusicSheets Chart = new MusicSheets();
+            if (Request.IsAuthenticated)
+            {
+                MusicSheets Chart = new MusicSheets();
 
-            Chart.SongList = SongsBL.SongList().ToList();
+                Chart.SongList = SongsBL.SongList().ToList();
 
-            Chart.MSTypeList = MSTBL.MSTypeList().ToList();
+                Chart.MSTypeList = MSTBL.MSTypeList().ToList();
 
-            Chart.InstrumentList = IBL.InstrumentList().ToList();
+                Chart.InstrumentList = IBL.InstrumentList().ToList();
 
-            return View(Chart);
+                return View(Chart);
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+            
         }
 
         [HttpPost]
@@ -174,6 +207,52 @@ namespace MMOasisAlajuela.Controllers
 
             }
 
+        }
+
+        public ActionResult Edit(int id = 0)
+        {
+            if ((Request.IsAuthenticated))
+            {
+                MusicSheets MS = MSBL.Details(id);
+
+                MS.SongList = SongsBL.SongList().ToList();
+
+                MS.MSTypeList = MSTBL.MSTypeList().ToList();
+
+                MS.InstrumentList = IBL.InstrumentList().ToList();
+
+                ViewBag.MSID = id;
+
+                return View(MS);
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+        }
+
+        //[HttpPost]
+        public ActionResult Disable (int id)
+        {
+            MusicSheets MS = MSBL.Details(id);
+
+            MS.ActiveFlag = false;
+
+            string InsertUser = User.Identity.GetUserName();
+
+            var r = MSBL.Update(MS, InsertUser);
+
+            if (!r)
+            {
+                ViewBag.Mensaje = "Ha ocurrido un error inesperado.";
+                return View("~/Views/Shared/Error.cshtml");
+            }
+            else
+            {
+                //ViewBag.SongID = MS.SongID;
+                return this.RedirectToAction("MusicSheetsbySong","MusicSheets", new { SongID = MS.SongID });
+                //return View();
+            }
         }
     }
 }

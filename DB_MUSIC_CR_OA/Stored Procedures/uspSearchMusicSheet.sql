@@ -1,8 +1,8 @@
 ﻿-- ======================================================================
--- Name: [usr].[uspReadMusicSheetsbySong]
--- Desc: Muestra las partituras de una cancion en especifico
+-- Name: [usr].[uspSearchMusicSheet]
+-- Desc: Permite mostrar la informacion de una partitura en especifico
 -- Auth: Jonathan Piedra jonitapc_quimind@hotmail.com
--- Date: 4/14/2019
+-- Date: 4/16/2019
 -------------------------------------------------------------
 -- Change History
 -------------------------------------------------------------
@@ -10,8 +10,8 @@
 -- --	----		------		-----------------------------
 -- ======================================================================
 
-CREATE PROCEDURE [usr].[uspReadMusicSheetsbySong]
-	@SongID	INT
+CREATE PROCEDURE [usr].[uspSearchMusicSheet]
+		@MSID INT
 AS 
     BEGIN
         SET NOCOUNT ON
@@ -24,15 +24,12 @@ AS
 				SELECT	[MSID]
 						,[MSTypeID]
 						,[SongID]
-						,[Version] = CASE WHEN [Version] IS NULL THEN 'NV' ELSE '"' + [Version] + '"' END
+						,[Version]
 						,[InstrumentID]
 						,[Tonality]
-						,[FileName]
-						,[FileData]
 						,[ActiveFlag]
 				FROM	[usr].[utbMusicSheets]
-				WHERE	[SongID] = @SongID
-						AND [ActiveFlag] = 1
+				WHERE	[MSID] = @MSID
 			-- =======================================================
 
         END TRY

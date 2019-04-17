@@ -20,7 +20,17 @@
         window.open(url, '_blank');
     }
 </script>
-
+<script type="text/javascript">
+    function ConfirmDisable(MSID) {
+        var x = confirm("Esta seguro que quiere eliminar esta Partitura???");
+        if (x) {
+            $.ajax({
+                url: '@Url.Action("Disable")',
+                data: { id: MSID }
+            }).done(function () { alert('Hecho!!!'); location.reload(); });
+        }
+    }
+</script>
 <h2>@ViewBag.Title - @ViewBag.SongName</h2>
 
 
@@ -45,6 +55,10 @@
                 .Encoded(false)
                 .Sanitized(false)
                 .RenderValueAs(c => Html.ActionLink("Descargar", "DownLoadFile", new { id = c.MSID }));
+       Columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(c => new HtmlString("<a id='DisableLink' href='#' onclick='ConfirmDisable(" + c.MSID + ");'>Eliminar</a>"));
    }).WithPaging(10).Sortable(true)
     </div>
 </div>

@@ -16,17 +16,32 @@ namespace MMOasisAlajuela.Controllers
 
         // GET: Songs
         public ActionResult Index()
-        {
-            return View(SongsBL.SongList().ToList());
+        {            
+            if (Request.IsAuthenticated)
+            {
+                return View(SongsBL.SongList().ToList());
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult Create()
         {
-            Songs Song = new Songs();
+            if (Request.IsAuthenticated)
+            {
+                Songs Song = new Songs();
 
-            Song.AuthorList = AuthorsBL.AuthorList();
+                Song.AuthorList = AuthorsBL.AuthorList();
 
-            return View(Song);
+                return View(Song);
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+            
         }
 
         [HttpPost]
@@ -61,15 +76,23 @@ namespace MMOasisAlajuela.Controllers
         }
         public ActionResult CreatebyAuthor(int id)
         {
-            Songs Song = new Songs();
+            if (Request.IsAuthenticated)
+            {
+                Songs Song = new Songs();
 
-            var aut = from a in AuthorsBL.AuthorList()
-                      where a.AuthorID == id
-                      select a;
+                var aut = from a in AuthorsBL.AuthorList()
+                          where a.AuthorID == id
+                          select a;
 
-            Song.AuthorList = aut.ToList();              
+                Song.AuthorList = aut.ToList();              
 
-            return View(Song);
+                return View(Song);
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+            
         }
 
         [HttpPost]

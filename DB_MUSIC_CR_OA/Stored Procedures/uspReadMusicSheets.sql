@@ -28,7 +28,9 @@ AS
 						,[Tonality]
 						,[FileName]
 						,[FileData]
+						,[ActiveFlag]
 				FROM	[usr].[utbMusicSheets]
+				WHERE	[ActiveFlag] = 1
 				ORDER BY [SongID],[InstrumentID]
 			-- =======================================================
 

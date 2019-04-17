@@ -21,6 +21,43 @@
 
 
 GO
+CREATE TRIGGER [usr].[utrLogMusicSheets] ON [usr].[utbMusicSheets]
+FOR INSERT,UPDATE
+AS
+	BEGIN
+		DECLARE @INSERTUPDATE VARCHAR(30)
+		DECLARE @StartValues	XML = (SELECT [MSID],[MSTypeID],[SongID],[Version],[InstrumentID],[Tonality],[FileName],[ActiveFlag],[InsertDate],[InsertUser],[LastModifyDate],[LastModifyUser] FROM Deleted [Values] for xml AUTO, ELEMENTS XSINIL)
+		DECLARE @EndValues		XML = (SELECT [MSID],[MSTypeID],[SongID],[Version],[InstrumentID],[Tonality],[FileName],[ActiveFlag],[InsertDate],[InsertUser],[LastModifyDate],[LastModifyUser] FROM Inserted [Values] for xml AUTO, ELEMENTS XSINIL)
+
+		CREATE TABLE #DBCC (EventType varchar(50), Parameters varchar(50), EventInfo nvarchar(max))
+
+		INSERT INTO #DBCC
+		EXEC ('DBCC INPUTBUFFER(@@SPID)')
+
+		--Assume it is an insert
+		SET @INSERTUPDATE ='INSERT'
+		--If there's data in deleted, it's an update
+		IF EXISTS(SELECT * FROM Deleted)
+		  SET @INSERTUPDATE='UPDATE'
+
+		INSERT INTO [adm].[utbLogActivities] ([ActivityType],[TargetTable],[SQLStatement],[StartValues],[EndValues],[User],[RoleAtTime],[LogActivityDate])
+		SELECT	@INSERTUPDATE
+				,'[usr].[utbMusicSheets]'
+				,(SELECT EventInfo FROM #DBCC)
+				,@StartValues
+				,@EndValues
+				,[LastModifyUser]
+				,[Role] = CASE WHEN R.[RoleName] IS NOT NULL THEN R.[RoleName] ELSE SYSTEM_USER END
+				,GETDATE()
+		FROM Inserted I
+		OUTER APPLY (SELECT RR.[RoleName]
+					 FROM	[adm].[utbUsers] U
+							LEFT JOIN [adm].[utbRoles] RR ON RR.[RoleID] = U.[RoleID]
+					 WHERE	U.[UserName] = SUBSTRING(I.[LastModifyUser],CHARINDEX('\',I.[LastModifyUser])+1,LEN(I.[LastModifyUser]))) R
+	END;
+
+
+GO
 EXECUTE sp_addextendedproperty 
 @name = N'MS_Description', 
 @value = N'Esta tabla contiene todas las partituras, cifrados, etc.', 

@@ -22,9 +22,19 @@ namespace BL
             return MSDAL.AddNew(musicsheet, insertuser);
         }
 
+        public bool Update(MusicSheets musicsheet, string insertuser)
+        {
+            return MSDAL.Update(musicsheet, insertuser);
+        }
+
         public List<MusicSheets> MSList ()
         {
             return MSDAL.MSList();
+        }
+
+        public MusicSheets Details(int msid)
+        {
+            return MSDAL.Details(msid);
         }
     }
 }

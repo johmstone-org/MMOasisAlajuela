@@ -114,6 +114,41 @@ namespace DAL
             return rpta;
         }
 
+        public bool Update(MusicSheets musicSheets, string InserUser)
+        {
+            bool rpta = false;
+
+            try
+            {
+                DynamicParameters Parm = new DynamicParameters();
+                Parm.Add("@InsertUser", InserUser);
+                Parm.Add("@MSID", musicSheets.MSID);
+                Parm.Add("@MSTypeID", musicSheets.MSTypeID);
+                Parm.Add("@SongID", musicSheets.SongID);
+                Parm.Add("@Version", musicSheets.Version);
+                Parm.Add("@InstrumentID", musicSheets.InstrumentID);
+                Parm.Add("@Tonality", musicSheets.Tonality);
+                Parm.Add("@ActiveFlag", musicSheets.ActiveFlag);
+
+                var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString());
+
+                SqlCon.Open();
+
+                SqlCon.Execute("[usr].[uspUpdateMusicSheet]", Parm, commandType: CommandType.StoredProcedure);
+
+                rpta = true;
+
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return rpta;
+        }
+
         public List<MusicSheets> MSList()
         {
             List<MusicSheets> Charts = new List<MusicSheets>();
@@ -145,6 +180,23 @@ namespace DAL
                             u.MSTypesData.MSTypeName = dr["MSTypeName"].ToString();
                         }
                     }
+                    // Insert Song Information
+                    SqlCmd = new SqlCommand("[usr].[uspSearchSong]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    SqlCmd.Parameters.AddWithValue("@SongID", u.SongID);
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            u.SongsData.SongID = Convert.ToInt32(dr["SongID"]);
+                            u.SongsData.SongName = dr["SongName"].ToString();
+                        }
+                    }
 
                     // Insert Instrument information
                     SqlCmd = new SqlCommand("[usr].[uspSearchInstrument]", SqlCon)
@@ -173,6 +225,54 @@ namespace DAL
                 throw;
             }
             return Charts;
+        }
+
+        public MusicSheets Details(int MSID)
+        {
+            MusicSheets Chart = new MusicSheets();
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspSearchMusicSheet]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    //Insert Parameters
+                    SqlParameter ParUserID = new SqlParameter
+                    {
+                        ParameterName = "@MSID",
+                        SqlDbType = SqlDbType.Int,
+                        Value = MSID
+                    };
+                    SqlCmd.Parameters.Add(ParUserID);
+
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            Chart.MSID = Convert.ToInt32(dr["MSID"]);
+                            Chart.MSTypeID = Convert.ToInt32(dr["MSTypeID"]);
+                            Chart.SongID = Convert.ToInt32(dr["SongID"]);
+                            Chart.Version = dr["Version"].ToString();
+                            Chart.InstrumentID = Convert.ToInt32(dr["InstrumentID"]);
+                            Chart.Tonality = dr["Tonality"].ToString();
+                            Chart.ActiveFlag = Convert.ToBoolean(dr["ActiveFlag"]);
+
+                        }
+                    }
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return Chart;
         }
     }
 }
