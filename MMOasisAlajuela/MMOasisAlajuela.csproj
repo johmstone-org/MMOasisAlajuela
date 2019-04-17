@@ -185,6 +185,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MusicSheetsController.cs" />
+    <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -317,6 +318,7 @@
     <Content Include="Views\MusicSheets\Index.cshtml" />
     <Content Include="Views\MusicSheets\Create.cshtml" />
     <Content Include="Views\MusicSheets\Edit.cshtml" />
+    <Content Include="Views\Programs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

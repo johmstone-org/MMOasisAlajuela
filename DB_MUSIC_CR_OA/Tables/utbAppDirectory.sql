@@ -6,6 +6,7 @@
     [Controller]     VARCHAR (50)  NOT NULL,
     [ViewPage]       VARCHAR (50)  NOT NULL,
     [Parameter]      VARCHAR (50)  NULL,
+	[Order]			 INT		   NOT NULL,
     [ActiveFlag]     BIT           CONSTRAINT [utbAppDirectoryDefaultActiveFlagIsTrue] DEFAULT ((1)) NOT NULL,
     [CreationDate]   DATETIME      CONSTRAINT [utbAppDirectoryDefaultCreationDateSysDatetime] DEFAULT (sysdatetime()) NOT NULL,
     [CreationUser]   VARCHAR (100) CONSTRAINT [utbAppDirectoryDefaultCreationUserSuser_Sname] DEFAULT (suser_sname()) NOT NULL,
@@ -120,6 +121,14 @@ EXECUTE sp_addextendedproperty
 @level0type = N'SCHEMA', @level0name = N'adm', 
 @level1type = N'TABLE', @level1name = N'utbAppDirectory', 
 @level2type = N'COLUMN', @level2name = N'Parameter';
+
+GO
+EXECUTE sp_addextendedproperty 
+@name = N'MS_Description', 
+@value = N'Valor que determina el orden en que deben aparecer los links.', 
+@level0type = N'SCHEMA', @level0name = N'adm', 
+@level1type = N'TABLE', @level1name = N'utbAppDirectory', 
+@level2type = N'COLUMN', @level2name = N'Order';
 
 
 GO

@@ -33,6 +33,7 @@ BEGIN
 				WHERE	AD.[ActiveFlag] = 1
 						AND U.[UserName] = @UserName
 						AND AD.[MainAppName] = @MainAppName
+				ORDER BY AD.[Order]
 			-- ========================================================================================
 	END TRY
         BEGIN CATCH

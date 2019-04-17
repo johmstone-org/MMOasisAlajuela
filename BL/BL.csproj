@@ -46,6 +46,7 @@
     <Compile Include="InstrumentsBL.cs" />
     <Compile Include="MSTypesBL.cs" />
     <Compile Include="MusicSheetsBL.cs" />
+    <Compile Include="ProgramsBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesBL.cs" />
     <Compile Include="SongsBL.cs" />

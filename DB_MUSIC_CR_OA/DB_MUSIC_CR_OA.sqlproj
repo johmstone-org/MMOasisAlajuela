@@ -112,6 +112,9 @@
     <Build Include="Stored Procedures\uspAddSong.sql" />
     <Build Include="Stored Procedures\uspSearchMusicSheet.sql" />
     <Build Include="Stored Procedures\uspUpdateMusicSheet.sql" />
+    <Build Include="Tables\utbPrograms.sql" />
+    <Build Include="Tables\utbSongsbyProgram.sql" />
+    <Build Include="Stored Procedures\uspReadPrograms.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />
