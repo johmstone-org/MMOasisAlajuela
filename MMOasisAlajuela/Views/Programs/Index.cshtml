@@ -11,7 +11,7 @@
 <script src="~/Scripts/gridmvc.min.js"></script>
 <script type="text/javascript">
     function OpenSongs(id) {
-        var url = '@Url.Action("SongsbyProgram", "Songs", new { id = "ProgramID" })';
+        var url = '@Url.Action("Details", "Programs", new { id = "ProgramID" })';
         url = url.replace("ProgramID", id)
         window.open(url, '_blank' , 'left=100,top=100,width=1000,height=650,toolbar=1,resizable=1');
     }

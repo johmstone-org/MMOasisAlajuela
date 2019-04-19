@@ -50,6 +50,7 @@
     <Compile Include="InstrumentsDAL.cs" />
     <Compile Include="MusicSheetsDAL.cs" />
     <Compile Include="MSTypesDAL.cs" />
+    <Compile Include="ProgramDetailsDAL.cs" />
     <Compile Include="ProgramsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesDAL.cs" />

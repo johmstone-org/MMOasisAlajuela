@@ -53,5 +53,67 @@ namespace DAL
             return List;
         }
 
+        public int AddNew(Programs Program, String InsertUser)
+        {
+            int ProgramID = 0;
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspAddProgram]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    //Insert Parameters
+                    SqlParameter ParDate = new SqlParameter
+                    {
+                        ParameterName = "@PDate",
+                        SqlDbType = SqlDbType.DateTime,
+                        Value = Program.ProgramDate
+                    };
+                    SqlCmd.Parameters.Add(ParDate);
+
+                    SqlParameter ParSchedule = new SqlParameter
+                    {
+                        ParameterName = "@PSchedule",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 20,
+                        Value = Program.ProgramSchedule
+                    };
+                    SqlCmd.Parameters.Add(ParSchedule);
+
+                    SqlParameter ParInsertUser = new SqlParameter
+                    {
+                        ParameterName = "@InsertUser",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = InsertUser
+                    };
+                    SqlCmd.Parameters.Add(ParInsertUser);
+
+                    SqlParameter ParProgramID = new SqlParameter
+                    {
+                        ParameterName = "@ProgramID",
+                        SqlDbType = SqlDbType.Int,
+                        Direction = ParameterDirection.Output
+                    };
+                    SqlCmd.Parameters.Add(ParProgramID);
+
+                    //Exec Command
+                    SqlCmd.ExecuteNonQuery();
+
+                    ProgramID = Convert.ToInt32(SqlCmd.Parameters["@ProgramID"].Value);
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return ProgramID;
+        }
     }
 }

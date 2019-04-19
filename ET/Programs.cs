@@ -14,10 +14,11 @@ namespace ET
 
         [Required(ErrorMessage ="Este campo es obligatorio")]
         [Display(Name ="Fecha")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date, ErrorMessage ="Esta campo debe contener una fecha valida")]
         public DateTime ProgramDate { get; set; }
 
-        [Required(ErrorMessage ="Este campo es obligratorio")]
+        //[Required(ErrorMessage ="Este campo es obligratorio")]
         [Display(Name ="Horario")]
         public string ProgramSchedule { get; set; }
 
@@ -25,5 +26,15 @@ namespace ET
         public bool CompleteFlag { get; set; }
 
         public bool ActiveFlag { get; set; }
+
+        public List<string> PSchedules()
+        {
+            return new List<string>
+            {
+                "7:30 AM",
+                "10:00 AM",
+                "7:00 PM"
+            };            
+        }
     }
 }

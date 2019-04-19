@@ -24,6 +24,7 @@ BEGIN
 				FROM	[adm].[utbAppDirectory]
 				WHERE 	[MainAppName] = @MainAppName
 						AND [MainClass] = @MainClass
+						AND [ActiveFlag] = 1
 			-- ========================================================================================
 	END TRY
         BEGIN CATCH

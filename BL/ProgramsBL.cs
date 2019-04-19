@@ -16,5 +16,10 @@ namespace BL
         {
             return PDAL.ProgramList();
         }
+
+        public int AddNew(Programs program, string insertuser)
+        {
+            return PDAL.AddNew(program, insertuser);
+        }
     }
 }
