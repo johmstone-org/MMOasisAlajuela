@@ -12,9 +12,9 @@ namespace BL
     {
         private MusicSheetsDAL MSDAL = new MusicSheetsDAL();
 
-        public List<MusicSheets> CaMusicSheetsbySong (int songid)
+        public List<MusicSheets> CaMusicSheetsbySong (int songid, string user)
         {
-            return MSDAL.MusicSheetsbySong(songid);
+            return MSDAL.MusicSheetsbySong(songid,user);
         }
 
         public bool AddNew (MusicSheets musicsheet, string insertuser)
@@ -27,14 +27,19 @@ namespace BL
             return MSDAL.Update(musicsheet, insertuser);
         }
 
-        public List<MusicSheets> MSList ()
+        public List<MusicSheets> MSList (string user)
         {
-            return MSDAL.MSList();
+            return MSDAL.MSList(user);
         }
 
-        public MusicSheets Details(int msid)
+        public MusicSheets Details(int msid, string user)
         {
-            return MSDAL.Details(msid);
+            return MSDAL.Details(msid, user);
+        }
+
+        public bool UpdateFavorite(int msid, string user)
+        {
+            return MSDAL.UpdateFavorite(msid, user);
         }
     }
 }

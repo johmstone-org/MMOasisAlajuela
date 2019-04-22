@@ -155,7 +155,7 @@ namespace DAL
                     SqlParameter ParRoleID = new SqlParameter
                     {
                         ParameterName = "@AuthorID",
-                        SqlDbType = SqlDbType.VarChar,
+                        SqlDbType = SqlDbType.Int,
                         Value = Song.AuthorID
                     };
                     SqlCmd.Parameters.Add(ParRoleID);

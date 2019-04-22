@@ -31,6 +31,22 @@
         }
     }
 </script>
+<script type="text/javascript">
+    function ChangeFavorite(MSID) {
+        $.ajax({
+            url: '@Url.Action("ChangeFavorite")',
+            data: { id: MSID }
+        }).done(function () { location.reload(); });
+    }
+</script>
+<script type="text/javascript">
+    function AddVersionLink(id) {
+        var url = '@Url.Action("AddVersion", "MusicSheets", new { id = "song" })';
+        url = url.replace("song", id)
+        window.open(url, '_blank' , 'left=100,top=100,width=500,height=650,toolbar=1,resizable=1');
+    }
+</script>
+
 <h2>@ViewBag.Title - @ViewBag.SongName</h2>
 
 
@@ -41,24 +57,30 @@
     </p>
     <div style="width: 90%; font-size: 15px;">
         @Html.Grid(Model).Columns(Columns =>
-   {
-       Columns.Add(c => c.MSTypesData.MSTypeName).Titled("Tipo").Filterable(true);
-       Columns.Add(c => c.InstrumentsData.Instrument).Titled("Instrumento").Filterable(true);
-       Columns.Add()
-        .Titled("Versión")
-        .Encoded(false)
-        .Sanitized(false)
-        .RenderValueAs(c => c.Version == "NV" ? new HtmlString("<p>No disponible</p>") : new HtmlString("<a id='OpenLink' href='#' onclick='OpenLink(" + c.Version.ToString() + ");'>Ver versión</a>"));
-       Columns.Add(c => c.Tonality).Titled("Tonalidad").Filterable(true);
-       Columns.Add(c => c.FileName).Titled("Nombre del archivo").Filterable(true);
-       Columns.Add()
-                .Encoded(false)
-                .Sanitized(false)
-                .RenderValueAs(c => Html.ActionLink("Descargar", "DownLoadFile", new { id = c.MSID }));
-       Columns.Add()
-                .Encoded(false)
-                .Sanitized(false)
-                .RenderValueAs(c => new HtmlString("<a id='DisableLink' href='#' onclick='ConfirmDisable(" + c.MSID + ");'>Eliminar</a>"));
-   }).WithPaging(10).Sortable(true)
+           {
+               Columns.Add()
+                        .Titled("Favorito")
+                        .Filterable(true)
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .RenderValueAs(c => c.Favorite ? new HtmlString("<a href='#' onclick='ChangeFavorite(" + c.MSID + ");'><img src='/images/FullyStar.png' style='width: 30px;' /></a>") : new HtmlString("<a href='#' onclick='ChangeFavorite(" + c.MSID + ");'><img src='/images/EmptyStar.png' style='width: 30px;' /></a>"));
+               Columns.Add(c => c.MSTypesData.MSTypeName).Titled("Tipo").Filterable(true);
+               Columns.Add(c => c.InstrumentsData.Instrument).Titled("Instrumento").Filterable(true);
+               Columns.Add()
+                        .Titled("Versión")
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .RenderValueAs(c => c.Version == "NV" ? new HtmlString("<a id='AddVersion' href='#' onclick='AddVersionLink(" + c.MSID + ");'>Agregar</a>") : new HtmlString("<a id='OpenLink' href='#' onclick='OpenLink(" + c.Version.ToString() + ");'>Ver versión</a>"));
+               Columns.Add(c => c.Tonality).Titled("Tonalidad").Filterable(true);
+               Columns.Add(c => c.FileName).Titled("Nombre del archivo").Filterable(true);
+               Columns.Add()
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .RenderValueAs(c => Html.ActionLink("Descargar", "DownLoadFile", new { id = c.MSID }));
+               Columns.Add()
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .RenderValueAs(c => new HtmlString("<a id='DisableLink' href='#' onclick='ConfirmDisable(" + c.MSID + ");'>Eliminar</a>"));
+           }).WithPaging(10).Sortable(true)
     </div>
 </div>

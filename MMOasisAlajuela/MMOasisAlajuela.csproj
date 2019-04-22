@@ -257,6 +257,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\Edit.png" />
+    <Content Include="images\EmptyStar.png" />
+    <Content Include="images\FullyStar.png" />
     <Content Include="images\pic01.jpg" />
     <Content Include="images\pic02.jpg" />
     <Content Include="images\pic03.jpg" />
@@ -358,6 +360,7 @@
     <Content Include="Views\Programs\Index.cshtml" />
     <Content Include="Views\Programs\Create.cshtml" />
     <Content Include="Views\Programs\Details.cshtml" />
+    <Content Include="Views\MusicSheets\AddVersion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

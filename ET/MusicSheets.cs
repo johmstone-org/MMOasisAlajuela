@@ -40,6 +40,9 @@ namespace ET
 
         public bool ActiveFlag { get; set; }
 
+        [Display(Name = "Favorito")]
+        public bool Favorite { get; set; }
+
         [Required]
         [Display(Name = "Archivo")]
         public byte[] FileData { get; set; }

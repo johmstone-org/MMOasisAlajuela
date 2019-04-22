@@ -14,7 +14,7 @@ namespace DAL
 {
     public class MusicSheetsDAL
     {
-        public List<MusicSheets> MusicSheetsbySong (int SongID)
+        public List<MusicSheets> MusicSheetsbySong (int SongID, string User)
         {
             List<MusicSheets> Charts = new List<MusicSheets>();
 
@@ -27,6 +27,7 @@ namespace DAL
                 DynamicParameters parameters = new DynamicParameters();
 
                 parameters.Add("@SongID", SongID, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@User", User, DbType.String, ParameterDirection.Input);
 
                 Charts = SqlMapper.Query<MusicSheets>(SqlCon, "[usr].[uspReadMusicSheetsbySong]", parameters, commandType: CommandType.StoredProcedure).ToList();
 
@@ -149,7 +150,7 @@ namespace DAL
             return rpta;
         }
 
-        public List<MusicSheets> MSList()
+        public List<MusicSheets> MSList(string User)
         {
             List<MusicSheets> Charts = new List<MusicSheets>();
 
@@ -158,8 +159,12 @@ namespace DAL
                 var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString());
 
                 SqlCon.Open();
-                
-                Charts = SqlMapper.Query<MusicSheets>(SqlCon, "[usr].[uspReadMusicSheets]", commandType: CommandType.StoredProcedure).ToList();
+
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("@User", User, DbType.String, ParameterDirection.Input);
+
+                Charts = SqlMapper.Query<MusicSheets>(SqlCon, "[usr].[uspReadMusicSheets]",parameters ,commandType: CommandType.StoredProcedure).ToList();
 
                 foreach (var u in Charts)
                 {
@@ -227,7 +232,7 @@ namespace DAL
             return Charts;
         }
 
-        public MusicSheets Details(int MSID)
+        public MusicSheets Details(int MSID, string User)
         {
             MusicSheets Chart = new MusicSheets();
 
@@ -242,13 +247,22 @@ namespace DAL
                     };
 
                     //Insert Parameters
-                    SqlParameter ParUserID = new SqlParameter
+                    SqlParameter ParMSID = new SqlParameter
                     {
                         ParameterName = "@MSID",
                         SqlDbType = SqlDbType.Int,
                         Value = MSID
                     };
-                    SqlCmd.Parameters.Add(ParUserID);
+                    SqlCmd.Parameters.Add(ParMSID);
+
+                    SqlParameter ParUser = new SqlParameter
+                    {
+                        ParameterName = "@User",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = User
+                    };
+                    SqlCmd.Parameters.Add(ParUser);
 
                     using (var dr = SqlCmd.ExecuteReader())
                     {
@@ -262,9 +276,27 @@ namespace DAL
                             Chart.InstrumentID = Convert.ToInt32(dr["InstrumentID"]);
                             Chart.Tonality = dr["Tonality"].ToString();
                             Chart.ActiveFlag = Convert.ToBoolean(dr["ActiveFlag"]);
+                            Chart.Favorite = Convert.ToBoolean(dr["Favorite"]);
 
                         }
                     }
+
+                    SqlCmd = new SqlCommand("[usr].[uspSearchSong]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    SqlCmd.Parameters.AddWithValue("@SongID", Chart.SongID);
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            Chart.SongsData.SongID = Convert.ToInt32(dr["SongID"]);
+                            Chart.SongsData.SongName = dr["SongName"].ToString();
+                        }
+                    }
+
                     if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
                 }
             }
@@ -273,6 +305,54 @@ namespace DAL
                 throw;
             }
             return Chart;
+        }
+
+        public bool UpdateFavorite(int MSID, string User)
+        {
+            bool rpta = false;
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspUpdateMSFavorite]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    //Insert Parameters
+                    SqlParameter ParInsertUser = new SqlParameter
+                    {
+                        ParameterName = "@User",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = User
+                    };
+                    SqlCmd.Parameters.Add(ParInsertUser);
+
+                    SqlParameter ParMSID = new SqlParameter
+                    {
+                        ParameterName = "@MSID",
+                        SqlDbType = SqlDbType.Int,
+                        Value = MSID
+                    };
+                    SqlCmd.Parameters.Add(ParMSID);
+
+                    //EXEC Command
+                    SqlCmd.ExecuteNonQuery();
+
+                    rpta = true;
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return rpta;
         }
     }
 }

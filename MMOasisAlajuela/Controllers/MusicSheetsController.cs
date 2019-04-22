@@ -23,7 +23,9 @@ namespace MMOasisAlajuela.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                List<MusicSheets> Charts = MSBL.MSList();
+                string InsertUser = User.Identity.GetUserName();
+
+                List<MusicSheets> Charts = MSBL.MSList(InsertUser);
                 return View(Charts.ToList());
             }
             else
@@ -37,7 +39,9 @@ namespace MMOasisAlajuela.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                List<MusicSheets> Charts = MSBL.CaMusicSheetsbySong(SongID);
+                string InsertUser = User.Identity.GetUserName();
+
+                List<MusicSheets> Charts = MSBL.CaMusicSheetsbySong(SongID, InsertUser);
 
                 var songname = from s in SongsBL.SongList()
                                where s.SongID == SongID
@@ -130,7 +134,9 @@ namespace MMOasisAlajuela.Controllers
         [HttpGet]
         public FileResult DownLoadFile(int id)
         {
-            List<MusicSheets> ObjFiles = MSBL.MSList();
+            string InsertUser = User.Identity.GetUserName();
+
+            List<MusicSheets> ObjFiles = MSBL.MSList(InsertUser);
 
             var FileById = (from FC in ObjFiles
                             where FC.MSID.Equals(id)
@@ -213,7 +219,9 @@ namespace MMOasisAlajuela.Controllers
         {
             if ((Request.IsAuthenticated))
             {
-                MusicSheets MS = MSBL.Details(id);
+                string InsertUser = User.Identity.GetUserName();
+
+                MusicSheets MS = MSBL.Details(id, InsertUser);
 
                 MS.SongList = SongsBL.SongList().ToList();
 
@@ -234,11 +242,11 @@ namespace MMOasisAlajuela.Controllers
         //[HttpPost]
         public ActionResult Disable (int id)
         {
-            MusicSheets MS = MSBL.Details(id);
+            string InsertUser = User.Identity.GetUserName();
+
+            MusicSheets MS = MSBL.Details(id, InsertUser);
 
             MS.ActiveFlag = false;
-
-            string InsertUser = User.Identity.GetUserName();
 
             var r = MSBL.Update(MS, InsertUser);
 
@@ -252,6 +260,65 @@ namespace MMOasisAlajuela.Controllers
                 //ViewBag.SongID = MS.SongID;
                 return this.RedirectToAction("MusicSheetsbySong","MusicSheets", new { SongID = MS.SongID });
                 //return View();
+            }
+        }
+
+
+        public ActionResult ChangeFavorite(int id)
+        {
+            string InsertUser = User.Identity.GetUserName();
+
+            MusicSheets MS = MSBL.Details(id, InsertUser);
+
+            var r = MSBL.UpdateFavorite(id, InsertUser);
+
+            if (!r)
+            {
+                ViewBag.Mensaje = "Ha ocurrido un error inesperado.";
+                return View("~/Views/Shared/Error.cshtml");
+            }
+            else
+            {
+                //ViewBag.SongID = MS.SongID;
+                return this.RedirectToAction("MusicSheetsbySong", "MusicSheets", new { SongID = MS.SongID });
+                //return View();
+            }
+        }
+
+        public ActionResult AddVersion(int id = 0)
+        {
+            if ((Request.IsAuthenticated))
+            {
+                string InsertUser = User.Identity.GetUserName();
+
+                MusicSheets MS = MSBL.Details(id, InsertUser);
+
+               return View(MS);
+            }
+            else
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddVersion(MusicSheets MS)
+        {
+            string InsertUser = User.Identity.GetUserName();
+
+            var r = MSBL.Update(MS, InsertUser);
+
+            if (!r)
+            {
+                ViewBag.Mensaje = "Ha ocurrido un error inesperado.";
+                return View("~/Views/Shared/Error.cshtml");
+            }
+            else
+            {
+                MS.ActionType = "CREATE";
+
+                return View(MS);
             }
         }
     }
