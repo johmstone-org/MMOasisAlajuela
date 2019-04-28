@@ -4,18 +4,22 @@
     ViewBag.Title = "Detalle del programa";
 }
 
+@{
+    Layout = "~/Views/Shared/_PupopLayout.cshtml";
+}
+
 <h2>@ViewBag.Title para el @ViewBag.PDate a las @ViewBag.PSchedule.</h2>
 
 @if (ViewBag.Status == false)
-    {
-        <p>
-            <a id="BtnNew" class="button small" href="@Url.Action("AddSong","Programs", new { id = ViewBag.PID })">Agregar Canción</a>
-        </p>
-    }
-    else
-    {
-        <p></p>
-    }
+{
+    <p>
+        <a id="BtnNew" class="button small" href="@Url.Action("AddSong","Programs", new { id = ViewBag.PID })">Agregar Canción</a>
+    </p>
+}
+else
+{
+    <p></p>
+}
 <table class="table">
     <tr>
         <th>
@@ -33,26 +37,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProgramID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SongsData.SongName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuthorsData.AuthorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActiveFlag)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SPID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SPID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SPID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongsData.SongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorsData.AuthorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveFlag)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SPID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SPID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SPID })
+            </td>
+        </tr>
+    }
 
 </table>

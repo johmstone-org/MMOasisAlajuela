@@ -122,5 +122,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />
+    <None Include="LOCAL_DB_MUSIC_CR_OA.publish.xml" />
   </ItemGroup>
 </Project>

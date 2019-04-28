@@ -321,5 +321,27 @@ namespace MMOasisAlajuela.Controllers
                 return View(MS);
             }
         }
+
+        public ActionResult Vizor(int id = 0)
+        {
+            ViewBag.ID = id;
+            return View();
+        }
+
+        public ActionResult GetPDF(int id = 0)
+        {
+            string InsertUser = User.Identity.GetUserName();
+
+            List<MusicSheets> ObjFiles = MSBL.MSList(InsertUser);
+
+            var FileById = (from FC in ObjFiles
+                            where FC.MSID.Equals(id)
+                            select new { FC.FileName, FC.FileData }).ToList().FirstOrDefault();
+
+            string strFile = FileById.FileName.ToString();
+
+            return File(FileById.FileData, System.Net.Mime.MediaTypeNames.Application.Pdf);
+        }
+
     }
 }

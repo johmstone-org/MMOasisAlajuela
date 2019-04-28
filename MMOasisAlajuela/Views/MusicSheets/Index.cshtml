@@ -48,6 +48,14 @@
         window.open(url, '_blank' , 'left=100,top=100,width=500,height=650,toolbar=1,resizable=1');
     }
 </script>
+<script type="text/javascript">
+    function ConfirmVizor(id) {
+        var url = '@Url.Action("Vizor", "MusicSheets", new { id = "song" })';
+        url = url.replace("song", id)
+        window.open(url, '_blank', 'left=100,top=100,width=900,height=650,toolbar=1,resizable=1');
+
+    }
+</script>
 
 <h2>@ViewBag.Title</h2>
 <div>
@@ -70,13 +78,17 @@
                     .Titled("Versión")
                     .Encoded(false)
                     .Sanitized(false)
-                    .RenderValueAs(c => c.Version == "NV" ? new HtmlString("<a id='AddVersion' href='#' onclick='AddVersionLink(" + c.MSID + ");'>Agregar</a>") : new HtmlString("<a id='OpenLink' href='#' onclick='OpenLink(" + c.Version.ToString() + ");'>Ver versión</a>"));
+                    .RenderValueAs(c => c.Version == "NV" ? new HtmlString("<a id='AddVersion' href='#' onclick='AddVersionLink(" + c.MSID + ");'>Agregar</a>") : new HtmlString("<a id='OpenLink' href='#' onclick='OpenLink(" + c.Version.ToString() + ");'>Escuchar versión</a>"));
                 Columns.Add(c => c.Tonality).Titled("Tonalidad").Filterable(true);
                 Columns.Add(c => c.FileName).Titled("Nombre del archivo").Filterable(true);
                 Columns.Add()
                     .Encoded(false)
                     .Sanitized(false)
                     .RenderValueAs(c => Html.ActionLink("Descargar", "DownLoadFile", new { id = c.MSID }));
+               Columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .RenderValueAs(c => new HtmlString("<a id='VizorLink' href='#' onclick='ConfirmVizor(" + c.MSID + ");'>Ver</a>"));
                 Columns.Add()
                     .Encoded(false)
                     .Sanitized(false)

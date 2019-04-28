@@ -286,7 +286,7 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
     <Content Include="Grid.mvc.readme" />
-    <None Include="Properties\PublishProfiles\MMOasisAlajuela - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MMOA - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
@@ -361,6 +361,7 @@
     <Content Include="Views\Programs\Create.cshtml" />
     <Content Include="Views\Programs\Details.cshtml" />
     <Content Include="Views\MusicSheets\AddVersion.cshtml" />
+    <Content Include="Views\MusicSheets\Vizor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
