@@ -58,5 +58,28 @@
     <Compile Include="UserAuthorization.cs" />
     <Compile Include="Users.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\ET.dll" />
+    <Content Include="bin\Debug\ET.pdb" />
+    <Content Include="bin\Release\ET.dll" />
+    <Content Include="bin\Release\ET.pdb" />
+    <Content Include="obj\Debug\ET.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ET.dll" />
+    <Content Include="obj\Debug\ET.pdb" />
+    <Content Include="obj\Release\ET.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\ET.dll" />
+    <Content Include="obj\Release\ET.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ET.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\ET.csprojAssemblyReference.cache" />
+    <None Include="obj\Release\ET.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Release\ET.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -63,5 +63,43 @@
       <Name>ET</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BL.dll" />
+    <Content Include="bin\Debug\BL.pdb" />
+    <Content Include="bin\Debug\DAL.dll" />
+    <Content Include="bin\Debug\DAL.pdb" />
+    <Content Include="bin\Debug\Dapper.dll" />
+    <Content Include="bin\Debug\Dapper.xml" />
+    <Content Include="bin\Debug\ET.dll" />
+    <Content Include="bin\Debug\ET.pdb" />
+    <Content Include="bin\Release\BL.dll" />
+    <Content Include="bin\Release\BL.pdb" />
+    <Content Include="bin\Release\DAL.dll" />
+    <Content Include="bin\Release\DAL.pdb" />
+    <Content Include="bin\Release\Dapper.dll" />
+    <Content Include="bin\Release\Dapper.xml" />
+    <Content Include="bin\Release\ET.dll" />
+    <Content Include="bin\Release\ET.pdb" />
+    <Content Include="obj\Debug\BL.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\BL.dll" />
+    <Content Include="obj\Debug\BL.pdb" />
+    <Content Include="obj\Release\BL.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\BL.dll" />
+    <Content Include="obj\Release\BL.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\BL.csproj.CopyComplete" />
+    <None Include="obj\Debug\BL.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\BL.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\build.force" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\BL.csproj.CopyComplete" />
+    <None Include="obj\Release\BL.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Release\BL.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
