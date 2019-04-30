@@ -119,6 +119,8 @@
     <Build Include="Stored Procedures\uspAddProgram.sql" />
     <Build Include="Tables\utbMSFavoritesbyUser.sql" />
     <Build Include="Stored Procedures\uspUpdateMSFavorite.sql" />
+    <Build Include="Stored Procedures\uspAddSongbyProgram.sql" />
+    <Build Include="Stored Procedures\uspUpdateSongbyProgram.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AZURE_DB_MUSIC_CR_OA.publish.publish.xml" />

@@ -40,6 +40,7 @@ namespace DAL
                         {
                             var Song = new ProgramDetails
                             {
+                                SPID = Convert.ToInt32(dr["SPID"]),
                                 ProgramID = Convert.ToInt32(dr["ProgramID"]),
                                 SongID = Convert.ToInt32(dr["SongID"]),
                                 AuthorID = Convert.ToInt32(dr["AuthorID"]),
@@ -94,6 +95,106 @@ namespace DAL
                 throw;
             }
             return List;
+        }
+
+        public bool AddSong (ProgramDetails PD, string InsertUser)
+        {
+            bool rpta = false;
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspAddSongbyProgram]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    //Insert Parameters
+                    SqlParameter ParName = new SqlParameter
+                    {
+                        ParameterName = "@ProgramID",
+                        SqlDbType = SqlDbType.Int,
+                        Value = PD.ProgramID
+                    };
+                    SqlCmd.Parameters.Add(ParName);
+
+                    SqlParameter ParProfile = new SqlParameter
+                    {
+                        ParameterName = "@SongID",
+                        SqlDbType = SqlDbType.Int,
+                        Value = PD.SongID
+                    };
+                    SqlCmd.Parameters.Add(ParProfile);
+
+                    SqlParameter ParInsertUser = new SqlParameter
+                    {
+                        ParameterName = "@InsertUser",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = InsertUser
+                    };
+                    SqlCmd.Parameters.Add(ParInsertUser);
+
+                    //Exec Command
+                    SqlCmd.ExecuteNonQuery();
+
+                    rpta = true;
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return rpta;
+        }
+
+        public int Disable (int id, string InsertUser)
+        {
+            int rpta = 0;
+
+            try
+            {
+                using (var SqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_MUSIC_CR_OA_Connection"].ToString()))
+                {
+                    SqlCon.Open();
+                    var SqlCmd = new SqlCommand("[usr].[uspUpdateSongbyProgram]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    //Insert Parameters
+                    SqlParameter ParSPID = new SqlParameter
+                    {
+                        ParameterName = "@SPID",
+                        SqlDbType = SqlDbType.Int,
+                        Value = id
+                    };
+                    SqlCmd.Parameters.Add(ParSPID);
+
+                    SqlParameter ParInsertUser = new SqlParameter
+                    {
+                        ParameterName = "@InsertUser",
+                        SqlDbType = SqlDbType.VarChar,
+                        Size = 50,
+                        Value = InsertUser
+                    };
+                    SqlCmd.Parameters.Add(ParInsertUser);
+
+                    //Exec Command
+                    rpta = Convert.ToInt32(SqlCmd.ExecuteScalar());
+
+                    if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return rpta;
         }
     }
 }

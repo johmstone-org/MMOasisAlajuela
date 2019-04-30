@@ -297,6 +297,38 @@ namespace DAL
                         }
                     }
 
+                    SqlCmd = new SqlCommand("[usr].[uspSearchMSTypes]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    SqlCmd.Parameters.AddWithValue("@MSTypeID", Chart.MSTypeID);
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            Chart.MSTypesData.MSTypeID = Convert.ToInt32(dr["MSTypeID"]);
+                            Chart.MSTypesData.MSTypeName = dr["MSTypeName"].ToString();
+                        }
+                    }
+
+                    SqlCmd = new SqlCommand("[usr].[uspSearchInstrument]", SqlCon)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    SqlCmd.Parameters.AddWithValue("@InstrumentID", Chart.InstrumentID);
+                    using (var dr = SqlCmd.ExecuteReader())
+                    {
+                        dr.Read();
+                        if (dr.HasRows)
+                        {
+                            Chart.InstrumentsData.InstrumentID = Convert.ToInt32(dr["InstrumentID"]);
+                            Chart.InstrumentsData.Instrument = dr["Instrument"].ToString();
+                        }
+                    }
+
                     if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
                 }
             }

@@ -13,14 +13,19 @@ namespace ET
         public int SPID { get; set; }
 
         [Required]
+        [Display(Name ="Programa")]
         public int ProgramID { get; set; }
 
         [Required(ErrorMessage ="Este campo es obligatorio")]
+        [Display(Name ="Canción")]
         public int SongID { get; set; }
 
+        [Display(Name ="Autor")]
         public int AuthorID { get; set; }
 
         public bool ActiveFlag { get; set; }
+
+        public bool Status { get; set; }
 
         public List<Songs> SongsList { get; set; }
 
@@ -33,6 +38,6 @@ namespace ET
             AuthorsData = new Authors();
         }
             
-
+        public string ActionType { get; set; }
     }
 }

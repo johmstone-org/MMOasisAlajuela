@@ -324,6 +324,18 @@ namespace MMOasisAlajuela.Controllers
 
         public ActionResult Vizor(int id = 0)
         {
+            string InsertUser = User.Identity.GetUserName();
+
+            MusicSheets MS = MSBL.Details(id, InsertUser);
+
+            ViewBag.MSType = MS.MSTypesData.MSTypeName.ToString();
+
+            ViewBag.Instrument = MS.InstrumentsData.Instrument.ToString();
+
+            ViewBag.SongName = MS.SongsData.SongName.ToString();
+
+            ViewBag.Label = MS.MSTypesData.MSTypeName.ToString() + " para " + MS.InstrumentsData.Instrument.ToString() + " de " + MS.SongsData.SongName.ToString();
+
             ViewBag.ID = id;
             return View();
         }

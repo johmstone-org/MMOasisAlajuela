@@ -4509,3 +4509,9 @@
             color: rgb(255, 255, 255);
         }
 
+@media screen and (max-width: 550px) {
+
+    #HeaderFrase {
+        visibility: hidden !important;
+    }
+}

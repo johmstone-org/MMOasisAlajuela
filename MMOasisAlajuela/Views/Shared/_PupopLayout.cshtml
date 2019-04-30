@@ -13,26 +13,12 @@
 
 <body>
     <link rel="stylesheet" href="~/assets/css/main.css" />
-    <!-- Header -->
-    @*<header id="header" class="alt">
-        <div class="logo"><a href="~/Home/Index">Ministerio <span>Musical</span></a></div>
-        <a href="#menu">Menu</a>
-    </header>*@
-
-    <!-- Nav -->
-    @*<nav id="menu" name="menu">
-        @Html.Partial("_LoginPartial")
-    </nav>*@
-
-
     <!-- Two -->
     <section id="two" class="wrapper style3">
-        <div class="inner">
-            <header class="align-center">
-                <p style="font-size: 10px;">Amamos al Espíritu Santo</p>
-                <h2 style="font-size: 22px;">Ministerio Musical - Oasis Alajuela</h2>
-            </header>
-        </div>
+        <header id="header" class="alt">
+            <div class="logo"><a>Ministerio Musical <span>Oasis Alajuela</span></a></div>
+            <a id="HeaderFrase">Amamos al Espíritu Santo</a>
+        </header>
     </section>
 
     <!-- Three -->
@@ -44,16 +30,16 @@
     </section>
 
     <!-- Footer -->
-    <footer id="footer">
+    <footer id="footer" style="padding:0px">
         <div class="container">
-            <ul class="icons">
+            <ul class="icons" style="margin:0px;">
                 <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="https://www.facebook.com/IGLEOA/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
                 <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
                 <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
             </ul>
         </div>
-        <div class="copyright">
+        <div class="copyright" style="margin:0px;">
             Oasis Alajuela &copy; @DateTime.Now.Year - Ministerio Musical
         </div>
     </footer>

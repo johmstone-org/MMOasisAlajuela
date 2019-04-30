@@ -362,6 +362,7 @@
     <Content Include="Views\Programs\Details.cshtml" />
     <Content Include="Views\MusicSheets\AddVersion.cshtml" />
     <Content Include="Views\MusicSheets\Vizor.cshtml" />
+    <Content Include="Views\Programs\AddSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

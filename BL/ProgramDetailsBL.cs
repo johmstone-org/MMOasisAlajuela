@@ -16,5 +16,15 @@ namespace BL
         {
             return PDDAL.Details(programid);
         }
+
+        public bool AddSong(ProgramDetails pd, string insertuser)
+        {
+            return PDDAL.AddSong(pd, insertuser);
+        }
+
+        public int Disable (int id, string insertuser)
+        {
+            return PDDAL.Disable(id, insertuser);
+        }
     }
 }
