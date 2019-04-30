@@ -1,0 +1,6 @@
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\bin\Debug\ET.dll
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\bin\Debug\ET.pdb
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Debug\ET.csproj.CoreCompileInputs.cache
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Debug\ET.dll
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Debug\ET.pdb
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Debug\ET.csprojAssemblyReference.cache

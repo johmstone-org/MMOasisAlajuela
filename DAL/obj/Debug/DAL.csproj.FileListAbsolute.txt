@@ -1,0 +1,11 @@
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\bin\Debug\DAL.dll
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\bin\Debug\DAL.pdb
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\bin\Debug\Dapper.dll
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\bin\Debug\ET.dll
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\bin\Debug\ET.pdb
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\bin\Debug\Dapper.xml
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.dll
+C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.pdb
