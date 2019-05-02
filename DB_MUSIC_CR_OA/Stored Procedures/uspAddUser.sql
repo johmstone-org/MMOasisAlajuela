@@ -15,7 +15,7 @@ CREATE PROCEDURE [adm].[uspAddUser]
 	@FullName	VARCHAR(50),
 	@UserName	VARCHAR(50),
 	@Email		VARCHAR(50),
-	@Password	NVARCHAR(50),
+	@Password	VARCHAR(50),
 	@RoleID		INT	= NULL
 AS 
     BEGIN
