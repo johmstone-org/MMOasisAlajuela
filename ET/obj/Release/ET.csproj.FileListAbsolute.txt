@@ -4,3 +4,9 @@ C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Release\ET.csprojAssemb
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Release\ET.csproj.CoreCompileInputs.cache
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Release\ET.dll
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\ET\obj\Release\ET.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\ET\bin\Release\ET.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\ET\bin\Release\ET.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\ET\obj\Release\ET.csprojAssemblyReference.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\ET\obj\Release\ET.csproj.CoreCompileInputs.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\ET\obj\Release\ET.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\ET\obj\Release\ET.pdb

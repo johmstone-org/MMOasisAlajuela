@@ -11,3 +11,16 @@ C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\BL\obj\Debug\BL.csproj.CoreCom
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\BL\obj\Debug\BL.csproj.CopyComplete
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\BL\obj\Debug\BL.dll
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\BL\obj\Debug\BL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\BL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\BL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\DAL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\ET.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\Dapper.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\DAL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\ET.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\bin\Debug\Dapper.xml
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\obj\Debug\BL.csproj.CopyComplete
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\obj\Debug\BL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\BL\obj\Debug\BL.pdb

@@ -9,3 +9,13 @@ C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.csproj.CoreC
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.dll
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Debug\DAL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Debug\DAL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Debug\DAL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Debug\ET.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Debug\ET.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Debug\Dapper.xml
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Debug\DAL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Debug\DAL.pdb

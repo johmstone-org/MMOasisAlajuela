@@ -9,3 +9,14 @@ C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Release\DAL.csproj.Cor
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Release\DAL.csproj.CopyComplete
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Release\DAL.dll
 C:\Users\JONATHAN\Dropbox\NewApps\MMOasisAlajuela\DAL\obj\Release\DAL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Release\DAL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Release\DAL.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Release\Dapper.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Release\ET.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Release\ET.pdb
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\bin\Release\Dapper.xml
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Release\DAL.csprojAssemblyReference.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Release\DAL.dll
+C:\Users\johmstone\source\repos\johmstone\MMOasisAlajuela\DAL\obj\Release\DAL.pdb
