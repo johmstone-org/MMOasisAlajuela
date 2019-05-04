@@ -189,6 +189,39 @@ namespace MMOasisAlajuela.Controllers
                     smtp.Credentials = nc;
                     smtp.Send(mm);
 
+                    var admins = from a in UserBL.UsersList()
+                                 where a.RoleID == 1
+                                 where a.ActiveFlag == true
+                                 select a;  
+                    
+                    foreach (var rr in admins)
+                    {
+                        Emails Emailadmin = new Emails();
+
+                        Emailadmin.FromEmail = "johmstone@gmail.com";
+                        Emailadmin.ToEmail = rr.Email;
+                        Emailadmin.SubjectEmail = "Ministerio Musical Oasis Alajuela - Solicitud de autorización";
+                        Emailadmin.BodyEmail = "Buenas " + rr.FullName + "... Se acaba de registrar " + model.FullName + " y esta pendiente de autorizar, por favor autorizar lo antes posible. http://mmoa.azurewebsites.net Bendiciones...";
+
+                        MailMessage mmm = new MailMessage(Emailadmin.FromEmail, Emailadmin.ToEmail);
+                        mmm.Subject = Emailadmin.SubjectEmail;
+                        mmm.Body = Emailadmin.BodyEmail;
+                        mmm.IsBodyHtml = false;
+
+                        SmtpClient smtp2 = new SmtpClient();
+                        smtp2.Host = "smtp.gmail.com";
+                        smtp2.Port = 587;
+                        smtp2.EnableSsl = true;
+                        //smtp.Host = "smtp.office365.com";
+                        //smtp.Port = 587;
+                        //smtp.EnableSsl = true;
+
+                        //NetworkCredential nc = new NetworkCredential("johmstone@gmail.com", "Jonitapc1985N");
+                        smtp.UseDefaultCredentials = true;
+                        smtp.Credentials = nc;
+                        smtp.Send(mmm);
+                    }
+
                     return this.RedirectToAction("RegisterConfirmation", "Account", new { FullName = model.FullName });
                 }
             }
